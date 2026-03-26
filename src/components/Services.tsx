@@ -47,8 +47,8 @@ const Services: React.FC = () => {
                 transition={{ duration: 0.4, delay: index * 0.08 }}
                 className="group premium-card p-7 cursor-pointer"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/8 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
-                  <Icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent transition-colors duration-300">
+                  <Icon className="w-6 h-6 text-accent group-hover:text-accent-foreground transition-colors duration-300" />
                 </div>
 
                 <h3 className="text-lg font-bold mb-2 text-foreground">
