@@ -2,7 +2,7 @@ import React from 'react';
 import { MapPin, Phone, Mail, Clock, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
-import capitalmedLogo from '@/assets/logo_background_white.png';
+import capitalmedLogo from '@/assets/light_logo.svg';
 
 const Footer: React.FC = () => {
   const { t } = useLanguage();
