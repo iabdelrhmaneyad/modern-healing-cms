@@ -58,8 +58,8 @@ const Pillars: React.FC = () => {
               >
                 <Link to={pillar.href} className="block group">
                   <div className="premium-card p-8 h-full">
-                    <div className="w-14 h-14 rounded-xl bg-primary/8 flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
-                      <Icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                    <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent transition-colors duration-300">
+                      <Icon className="w-6 h-6 text-accent group-hover:text-accent-foreground transition-colors duration-300" />
                     </div>
 
                     <h3 className="text-xl font-bold text-foreground mb-1">
