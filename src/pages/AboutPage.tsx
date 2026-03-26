@@ -68,7 +68,7 @@ const AboutPage: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { icon: Target, title: t('about.mission'), text: t('about.mission.text'), color: 'bg-primary/10', iconColor: 'text-primary' },
+              { icon: Target, title: t('about.mission'), text: t('about.mission.text'), color: 'bg-accent/10', iconColor: 'text-accent' },
               { icon: Eye, title: t('about.vision'), text: t('about.vision.text'), color: 'bg-secondary/10', iconColor: 'text-secondary' },
             ].map((item, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
