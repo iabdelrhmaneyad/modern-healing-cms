@@ -94,12 +94,12 @@ const Header: React.FC = () => {
       {/* Main Navigation */}
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16 md:h-18">
-          {/* Logo - fixed, no change on scroll */}
+          {/* Logo - swaps between light/dark based on scroll */}
           <Link to="/" className="flex items-center">
             <img
-              src={logo}
+              src={isScrolled ? darkLogo : lightLogo}
               alt="CapitalMed"
-              className="h-10 md:h-12 w-auto object-contain"
+              className="h-12 md:h-14 w-auto object-contain transition-all duration-500"
             />
           </Link>
 
