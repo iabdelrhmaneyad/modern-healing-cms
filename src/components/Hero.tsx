@@ -120,7 +120,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap gap-8 mt-12 pt-8 border-t border-white/10"
+            className="flex flex-wrap gap-4 sm:gap-8 mt-6 sm:mt-12 pt-4 sm:pt-8 border-t border-white/10"
           >
             {[
               { value: '577K m²', label: 'Campus Area' },
