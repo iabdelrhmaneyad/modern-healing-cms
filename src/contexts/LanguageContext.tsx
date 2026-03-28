@@ -31,17 +31,28 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.careers': 'Careers',
     'nav.location': 'Location',
     'nav.faq': 'FAQ',
+    'nav.patientPortal': 'Patient Portal',
 
     // Hero
     'hero.title': 'CAPITALMED',
     'hero.tagline': 'Trusted for Life',
-    'hero.description': "Egypt's premier smart healthcare city, delivering world-class medical excellence.",
+    'hero.description': "Egypt's premier smart healthcare city, delivering world-class medical excellence across 144 acres in New Cairo.",
     'hero.stats.area': '577,000 m²',
     'hero.stats.investment': '$1.2 Billion USD',
     'hero.stats.beds': '4,500+ Beds',
     'hero.stats.specialties': '100+ Medical Specialties',
     'hero.cta.doctor': 'Find a Doctor',
     'hero.cta.learn': 'Learn More',
+    'hero.smartCity': 'Smart Healthcare City',
+    'hero.laPlaza': 'La Plaza Hospital',
+    'hero.laPlaza.tagline': 'A CAPITALMED Hospital',
+
+    // Quick Access Bar
+    'quick.bar.patients': 'Patients',
+    'quick.bar.doctors': 'Doctors',
+    'quick.bar.bookNow': 'Book Now',
+    'quick.bar.emergency': 'Emergency',
+    'quick.bar.hotline': 'Hotline',
 
     // Quick Actions
     'quick.title': 'You may be looking for',
@@ -99,13 +110,15 @@ const translations: Record<Language, Record<string, string>> = {
     'services.emergency.trauma': 'Level I Trauma Center',
     'services.emergency.ambulance': 'Advanced Ambulance Fleet',
     'services.emergency.rapid': 'Rapid Response Teams',
-    'services.emergency.call': 'Call Emergency: 123',
+    'services.emergency.call': 'Call Emergency: 16999',
     'services.laboratory.title': 'Laboratory',
     'services.laboratory.desc': 'State-of-the-art diagnostic testing and analysis',
     'services.pharmacy.title': 'Pharmacy',
     'services.pharmacy.desc': '24/7 pharmacy services with comprehensive medication management',
     'services.ent.title': 'ENT',
     'services.ent.desc': 'Expert care for ear, nose, and throat conditions',
+    'services.nutrition.title': 'Clinical Nutrition',
+    'services.nutrition.desc': 'Personalized dietary plans and nutritional therapy for optimal health outcomes',
     'services.cta.title': 'Need Medical Assistance?',
     'services.cta.subtitle': 'Our team of experts is here to help you 24/7',
     'services.cta.appointment': 'Book Appointment',
@@ -114,17 +127,17 @@ const translations: Record<Language, Record<string, string>> = {
     // About
     'about.title': 'About CAPITALMED',
     'about.subtitle': 'Excellence in Healthcare',
-    'about.description': 'CAPITALMED Healthcare City is a visionary project designed to transform healthcare delivery in Egypt, Africa, and the Middle East.',
+    'about.description': 'CAPITALMED Healthcare City is a visionary project stretching over 144 acres in Badr City, New Cairo. With a total investment of over $1.2 billion USD, it is the largest integrated healthcare city in Africa and the Middle East, designed to serve over 5 million clients annually.',
     'about.page.title': 'About Us',
     'about.page.subtitle': 'Transforming healthcare delivery in Egypt, Africa, and the Middle East',
     'about.story.title': 'Our Story',
     'about.story.p1': 'CAPITALMED Healthcare City is a visionary project designed to transform healthcare delivery in Egypt, Africa, and the Middle East. Our state-of-the-art facilities combine cutting-edge technology with compassionate care.',
-    'about.story.p2': 'Located in the New Administrative Capital, we are building a comprehensive medical ecosystem that will serve millions of patients annually with world-class healthcare services.',
+    'about.story.p2': 'Located in Badr City, New Cairo, we are building a comprehensive medical ecosystem comprising 19 fully integrated facilities that will serve millions of patients annually with world-class healthcare services.',
     'about.years': 'Years of Excellence',
     'about.mission': 'Our Mission',
     'about.mission.text': 'To provide accessible, high-quality healthcare services that improve lives and advance medical science across the region.',
     'about.vision': 'Our Vision',
-    'about.vision.text': 'To be the leading healthcare destination in the region, known for excellence, innovation, and patient-centered care.',
+    'about.vision.text': 'To be recognized as a regional premier destination for providing integrated world-class health care services to the community it serves in a safe, efficient, and respectful manner locally & internationally.',
     'about.values.title': 'Our Core Values',
     'about.values.subtitle': 'The principles that guide everything we do',
     'about.value.compassion': 'Compassion',
@@ -155,7 +168,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.subtitle': 'We are here to help',
     'contact.page.title': 'Contact Us',
     'contact.page.subtitle': "We're here to answer your questions and provide the care you need",
-    'contact.address': 'New Administrative Capital, Cairo, Egypt',
+    'contact.address': 'Badr City, New Cairo, Egypt',
     'contact.phone': '+20 2 1234 5678',
     'contact.email': 'info@capitalmed.eg',
     'contact.hours': '24/7 Emergency Services',
@@ -176,14 +189,14 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.faq.q1': 'What are your visiting hours?',
     'contact.faq.a1': 'General visiting hours are from 10:00 AM to 8:00 PM. ICU visiting hours are limited to specific times.',
     'contact.faq.q2': 'How do I book an appointment?',
-    'contact.faq.a2': 'You can book online through our website, call us, or visit the reception desk.',
+    'contact.faq.a2': 'You can book online through our website, call us at 16999, or visit the reception desk.',
     'contact.faq.q3': 'Do you accept international patients?',
     'contact.faq.a3': 'Yes, we have a dedicated medical tourism department to assist international patients.',
     'contact.faq.q4': 'What insurance do you accept?',
     'contact.faq.a4': 'We accept most major insurance providers. Please contact us for specific information.',
 
     // Footer
-    'footer.description': "Egypt's premier smart healthcare city, providing world-class medical services.",
+    'footer.description': "Egypt's premier smart healthcare city, providing world-class medical services across 144 acres.",
     'footer.quicklinks': 'Quick Links',
     'footer.services': 'Services',
     'footer.contact': 'Contact',
@@ -258,11 +271,11 @@ const translations: Record<Language, Record<string, string>> = {
     'tourism.section1.title': 'Our Core Philosophy',
     'tourism.section1.subtitle': 'Three pillars that define our international healthcare approach.',
     'tourism.pillar.governance': 'Clinical Governance',
-    'tourism.pillar.governance.desc': 'Every procedure backed by measurable outcomes and cross-border continuity protocols. Our clinical framework ensures no patient falls through the cracks — from initial consult to final follow-up.',
+    'tourism.pillar.governance.desc': 'Every procedure backed by measurable outcomes and cross-border continuity protocols.',
     'tourism.pillar.data': 'Data Integrity',
-    'tourism.pillar.data.desc': 'All patient interactions logged within a secure, HIPAA-compliant lifecycle governance framework. Real-time dashboards keep every stakeholder informed while maintaining the highest privacy standards.',
+    'tourism.pillar.data.desc': 'All patient interactions logged within a secure, HIPAA-compliant lifecycle governance framework.',
     'tourism.pillar.value': 'Value Proposition',
-    'tourism.pillar.value.desc': 'High-acuity medical care with the logistical precision of a global logistics firm. We combine clinical excellence with operational efficiency to deliver unmatched patient value.',
+    'tourism.pillar.value.desc': 'High-acuity medical care with the logistical precision of a global logistics firm.',
     'tourism.section2.badge': 'II. Full Tier Architecture',
     'tourism.section2.title': '7 Commercial Levels',
     'tourism.section2.subtitle': 'From remote consultations to institutional contracts — a tier for every patient profile.',
@@ -282,7 +295,7 @@ const translations: Record<Language, Record<string, string>> = {
     'tourism.section7.title': 'Measurable Excellence',
     'tourism.cta.final.title': 'This Is Not a Vacation',
     'tourism.cta.final.subtitle': 'With a Side of Surgery.',
-    'tourism.cta.final.desc': 'It is a technologically-enabled, internationally-governed healthcare program designed for the modern global citizen. We provide transparency where there is usually opacity, and continuity where there is usually a gap.',
+    'tourism.cta.final.desc': 'It is a technologically-enabled, internationally-governed healthcare program designed for the modern global citizen.',
     'tourism.cta.final.review': 'Start Your Free Case Review',
     'tourism.cta.final.brochure': 'Download Program Brochure',
 
@@ -464,7 +477,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Careers
     'careers.hero.title': 'Join Our Mission',
-    'careers.hero.subtitle': 'Help us shape the future of healthcare at CapitalMed.',
+    'careers.hero.subtitle': 'Help us shape the future of healthcare at CapitalMed. We are creating more than 15,000 jobs.',
     'careers.search.placeholder': 'Search positions...',
     'careers.filter.allDepts': 'All Departments',
     'careers.filter.medical': 'Medical',
@@ -516,7 +529,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Common
     'common.search': 'Search',
 
-    // Miscs discovered
+    // Miscs
     'misc.healthcareExcellence': 'Healthcare Excellence',
     'misc.researchInnovation': 'Research & Innovation',
     'misc.pageNotFound': 'Oops! Page not found',
@@ -544,7 +557,67 @@ const translations: Record<Language, Record<string, string>> = {
     'lang.en': 'English',
     'lang.fr': 'Français',
     'lang.de': 'Deutsch',
-    'hero.smartCity': 'Smart Healthcare City',
+
+    // Hotline
+    'hotline.label': 'CAPITALMED Hotline',
+    'hotline.available': 'Available 24/7 for emergencies & inquiries',
+
+    // Success Stories
+    'stories.label': 'Patient Testimonials',
+    'stories.title': 'Success Stories',
+    'stories.subtitle': 'Real experiences from our patients and their families',
+    'stories.1.quote': 'The cardiac team at CAPITALMED saved my life. The level of care and technology here is truly world-class. From diagnosis to recovery, every step was handled with precision and compassion.',
+    'stories.1.name': 'Ahmed Hassan',
+    'stories.1.treatment': 'Cardiac Surgery',
+    'stories.2.quote': 'Coming from Dubai for treatment was the best decision. The medical tourism team handled everything — flights, accommodation, and my entire treatment plan. I felt at home throughout.',
+    'stories.2.name': 'Sarah Al-Maktoum',
+    'stories.2.treatment': 'Orthopedic Surgery',
+    'stories.3.quote': 'My daughter received exceptional pediatric care. The children\'s wing is designed to make young patients feel comfortable, and the doctors communicated with us every step of the way.',
+    'stories.3.name': 'Fatima El-Sayed',
+    'stories.3.treatment': 'Pediatric Oncology',
+
+    // Accessibility
+    'accessibility.title': 'Vision Accessibility',
+    'accessibility.fontSize': 'Font Size',
+    'accessibility.highContrast': 'High Contrast',
+    'accessibility.highContrast.desc': 'Increase color contrast for better readability',
+    'accessibility.readingMode': 'Reading Mode',
+    'accessibility.readingMode.desc': 'Simplified layout for focused reading',
+    'accessibility.reset': 'Reset All',
+
+    // Patient Portal
+    'portal.label': 'Your Health, Your Portal',
+    'portal.title': 'Patient Portal',
+    'portal.subtitle': 'Access your medical records, book appointments, and manage your healthcare journey — all in one place.',
+    'portal.access.title': 'Access Your Portal',
+    'portal.access.desc': 'Log in to view your health records, upcoming appointments, test results, and more.',
+    'portal.login': 'Log In',
+    'portal.register': 'Create Account',
+    'portal.features.title': 'What You Can Do',
+    'portal.features.subtitle': 'Everything you need to manage your healthcare in one place',
+    'portal.feature.appointments.title': 'Book Appointments',
+    'portal.feature.appointments.desc': 'Schedule and manage your visits with ease',
+    'portal.feature.records.title': 'Medical Records',
+    'portal.feature.records.desc': 'Access your complete health history securely',
+    'portal.feature.prescriptions.title': 'Prescriptions',
+    'portal.feature.prescriptions.desc': 'View and refill your medications online',
+    'portal.feature.results.title': 'Test Results',
+    'portal.feature.results.desc': 'Get lab and imaging results as soon as they\'re ready',
+    'portal.feature.messaging.title': 'Message Your Doctor',
+    'portal.feature.messaging.desc': 'Communicate directly with your care team',
+    'portal.feature.billing.title': 'Billing & Payments',
+    'portal.feature.billing.desc': 'View statements and make payments securely',
+    'portal.feature.history.title': 'Visit History',
+    'portal.feature.history.desc': 'Review past visits and treatment summaries',
+    'portal.feature.insurance.title': 'Insurance Info',
+    'portal.feature.insurance.desc': 'Manage your insurance details and claims',
+    'portal.cta.title': 'Need Help Getting Started?',
+    'portal.cta.desc': 'Our patient services team is available 24/7 to help you set up your portal account.',
+    'portal.cta.contact': 'Contact Support',
+
+    // La Plaza
+    'laPlaza.badge': 'La Plaza Hospital',
+    'laPlaza.tagline': 'A CAPITALMED Hospital',
   },
   ar: {
     // Navigation
@@ -567,11 +640,12 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.careers': 'الوظائف',
     'nav.location': 'الموقع',
     'nav.faq': 'الأسئلة الشائعة',
+    'nav.patientPortal': 'بوابة المريض',
 
     // Hero
     'hero.title': 'كابيتال ميد',
     'hero.tagline': 'موثوق به مدى الحياة',
-    'hero.description': 'أول مدينة طبية ذكية في مصر، تقدم التميز الطبي العالمي.',
+    'hero.description': 'أول مدينة طبية ذكية في مصر، تمتد على ١٤٤ فداناً في القاهرة الجديدة، تقدم التميز الطبي العالمي.',
     'hero.stats.area': '٥٧٧,٠٠٠ م²',
     'hero.stats.investment': '١.٢ مليار دولار أمريكي',
     'hero.stats.beds': '+٤,٥٠٠ سرير',
@@ -579,6 +653,15 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.cta.doctor': 'ابحث عن طبيب',
     'hero.cta.learn': 'اعرف المزيد',
     'hero.smartCity': 'مدينة الرعاية الصحية الذكية',
+    'hero.laPlaza': 'مستشفى لا بلازا',
+    'hero.laPlaza.tagline': 'مستشفى تابع لكابيتال ميد',
+
+    // Quick Access Bar
+    'quick.bar.patients': 'المرضى',
+    'quick.bar.doctors': 'الأطباء',
+    'quick.bar.bookNow': 'احجز الآن',
+    'quick.bar.emergency': 'الطوارئ',
+    'quick.bar.hotline': 'الخط الساخن',
 
     // Quick Actions
     'quick.title': 'ربما تبحث عن',
@@ -636,13 +719,15 @@ const translations: Record<Language, Record<string, string>> = {
     'services.emergency.trauma': 'مركز إصابات المستوى الأول',
     'services.emergency.ambulance': 'أسطول إسعاف متقدم',
     'services.emergency.rapid': 'فرق استجابة سريعة',
-    'services.emergency.call': 'اتصل بالطوارئ: ١٢٣',
+    'services.emergency.call': 'اتصل بالطوارئ: ١٦٩٩٩',
     'services.laboratory.title': 'المختبر',
     'services.laboratory.desc': 'اختبارات تشخيصية متطورة وتحليلات دقيقة',
     'services.pharmacy.title': 'الصيدلية',
     'services.pharmacy.desc': 'خدمات صيدلية على مدار الساعة مع إدارة شاملة للأدوية',
     'services.ent.title': 'الأنف والأذن والحنجرة',
     'services.ent.desc': 'رعاية متخصصة لحالات الأنف والأذن والحنجرة',
+    'services.nutrition.title': 'التغذية السريرية',
+    'services.nutrition.desc': 'خطط غذائية مخصصة وعلاج تغذوي لنتائج صحية مثلى',
     'services.cta.title': 'هل تحتاج إلى مساعدة طبية؟',
     'services.cta.subtitle': 'فريقنا من الخبراء هنا لمساعدتك على مدار الساعة',
     'services.cta.appointment': 'احجز موعد',
@@ -651,17 +736,17 @@ const translations: Record<Language, Record<string, string>> = {
     // About
     'about.title': 'عن كابيتال ميد',
     'about.subtitle': 'التميز في الرعاية الصحية',
-    'about.description': 'مدينة كابيتال ميد الطبية هي مشروع رؤيوي مصمم لتحويل تقديم الرعاية الصحية في مصر وأفريقيا والشرق الأوسط.',
+    'about.description': 'مدينة كابيتال ميد الطبية مشروع رؤيوي يمتد على ١٤٤ فداناً في مدينة بدر، القاهرة الجديدة. باستثمار إجمالي يتجاوز ١.٢ مليار دولار، تُعد أكبر مدينة طبية متكاملة في أفريقيا والشرق الأوسط، مصممة لخدمة أكثر من ٥ ملايين عميل سنوياً.',
     'about.page.title': 'من نحن',
     'about.page.subtitle': 'نحول تقديم الرعاية الصحية في مصر وأفريقيا والشرق الأوسط',
     'about.story.title': 'قصتنا',
     'about.story.p1': 'مدينة كابيتال ميد الطبية هي مشروع رؤيوي مصمم لتحويل تقديم الرعاية الصحية في مصر وأفريقيا والشرق الأوسط. تجمع مرافقنا الحديثة بين التكنولوجيا المتطورة والرعاية الإنسانية.',
-    'about.story.p2': 'تقع في العاصمة الإدارية الجديدة، نحن نبني نظامًا طبيًا شاملًا سيخدم ملايين المرضى سنويًا بخدمات رعاية صحية عالمية المستوى.',
+    'about.story.p2': 'تقع في مدينة بدر، القاهرة الجديدة، نحن نبني نظامًا طبيًا شاملًا يضم ١٩ مرفقاً متكاملاً سيخدم ملايين المرضى سنويًا بخدمات رعاية صحية عالمية المستوى.',
     'about.years': 'سنوات من التميز',
     'about.mission': 'مهمتنا',
     'about.mission.text': 'توفير خدمات رعاية صحية عالية الجودة وسهلة الوصول تحسن الحياة وتطور العلوم الطبية في المنطقة.',
     'about.vision': 'رؤيتنا',
-    'about.vision.text': 'أن نكون الوجهة الصحية الرائدة في المنطقة، معروفين بالتميز والابتكار والرعاية المتمحورة حول المريض.',
+    'about.vision.text': 'أن نكون معروفين كوجهة إقليمية رائدة لتقديم خدمات رعاية صحية متكاملة عالمية المستوى للمجتمع الذي نخدمه بطريقة آمنة وفعالة ومحترمة محلياً ودولياً.',
     'about.values.title': 'قيمنا الأساسية',
     'about.values.subtitle': 'المبادئ التي توجه كل ما نفعله',
     'about.value.compassion': 'التعاطف',
@@ -692,7 +777,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.subtitle': 'نحن هنا للمساعدة',
     'contact.page.title': 'اتصل بنا',
     'contact.page.subtitle': 'نحن هنا للإجابة على أسئلتك وتقديم الرعاية التي تحتاجها',
-    'contact.address': 'العاصمة الإدارية الجديدة، القاهرة، مصر',
+    'contact.address': 'مدينة بدر، القاهرة الجديدة، مصر',
     'contact.phone': '+20 2 1234 5678',
     'contact.email': 'info@capitalmed.eg',
     'contact.hours': 'خدمات الطوارئ على مدار الساعة',
@@ -713,14 +798,14 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.faq.q1': 'ما هي ساعات الزيارة؟',
     'contact.faq.a1': 'ساعات الزيارة العامة من ١٠:٠٠ صباحًا إلى ٨:٠٠ مساءً. ساعات زيارة العناية المركزة محدودة بأوقات معينة.',
     'contact.faq.q2': 'كيف أحجز موعد؟',
-    'contact.faq.a2': 'يمكنك الحجز عبر الإنترنت من خلال موقعنا، الاتصال بنا، أو زيارة مكتب الاستقبال.',
+    'contact.faq.a2': 'يمكنك الحجز عبر الإنترنت من خلال موقعنا، الاتصال بنا على ١٦٩٩٩، أو زيارة مكتب الاستقبال.',
     'contact.faq.q3': 'هل تقبلون المرضى الدوليين؟',
     'contact.faq.a3': 'نعم، لدينا قسم مخصص للسياحة العلاجية لمساعدة المرضى الدوليين.',
     'contact.faq.q4': 'ما هي شركات التأمين التي تقبلونها؟',
     'contact.faq.a4': 'نقبل معظم شركات التأمين الكبرى. يرجى الاتصال بنا للحصول على معلومات محددة.',
 
     // Footer
-    'footer.description': 'أول مدينة طبية ذكية في مصر، تقدم خدمات طبية عالمية المستوى.',
+    'footer.description': 'أول مدينة طبية ذكية في مصر، تمتد على ١٤٤ فداناً، تقدم خدمات طبية عالمية المستوى.',
     'footer.quicklinks': 'روابط سريعة',
     'footer.services': 'الخدمات',
     'footer.contact': 'التواصل',
@@ -757,7 +842,7 @@ const translations: Record<Language, Record<string, string>> = {
     'facilities.support.green': 'المساحات الخضراء',
     'facilities.support.green.desc': 'حدائق الشفاء وممرات المشي في جميع أنحاء الحرم',
 
-    // Medical Tourism
+    // Medical Tourism (shortened keys kept same)
     'tourism.hero.label': 'المركز العالمي',
     'tourism.hero.title': 'رعاية صحية عالمية، قريبة من المنزل',
     'tourism.hero.subtitle': 'كابيتال ميد هي "العيادة المركزية للعالم"، في متناول ٣.٦ مليار شخص خلال ٨ ساعات طيران.',
@@ -795,11 +880,11 @@ const translations: Record<Language, Record<string, string>> = {
     'tourism.section1.title': 'فلسفتنا الأساسية',
     'tourism.section1.subtitle': 'ثلاث ركائز تحدد نهجنا الدولي في الرعاية الصحية.',
     'tourism.pillar.governance': 'الحوكمة السريرية',
-    'tourism.pillar.governance.desc': 'كل إجراء مدعوم بنتائج قابلة للقياس وبروتوكولات استمرارية عابرة للحدود. يضمن إطارنا السريري عدم إهمال أي مريض — من الاستشارة الأولى إلى المتابعة النهائية.',
+    'tourism.pillar.governance.desc': 'كل إجراء مدعوم بنتائج قابلة للقياس وبروتوكولات استمرارية عابرة للحدود.',
     'tourism.pillar.data': 'سلامة البيانات',
-    'tourism.pillar.data.desc': 'جميع تفاعلات المرضى مسجلة ضمن إطار حوكمة دورة حياة آمن ومتوافق مع HIPAA. لوحات معلومات فورية تُبقي جميع الأطراف على اطلاع مع الحفاظ على أعلى معايير الخصوصية.',
+    'tourism.pillar.data.desc': 'جميع تفاعلات المرضى مسجلة ضمن إطار حوكمة دورة حياة آمن ومتوافق مع HIPAA.',
     'tourism.pillar.value': 'القيمة المقترحة',
-    'tourism.pillar.value.desc': 'رعاية طبية عالية الدقة مع كفاءة لوجستية على مستوى عالمي. نجمع بين التميز السريري والكفاءة التشغيلية لتقديم قيمة لا مثيل لها للمريض.',
+    'tourism.pillar.value.desc': 'رعاية طبية عالية الدقة مع كفاءة لوجستية على مستوى عالمي.',
     'tourism.section2.badge': 'ثانياً: هيكل المستويات الكامل',
     'tourism.section2.title': '٧ مستويات تجارية',
     'tourism.section2.subtitle': 'من الاستشارات عن بُعد إلى العقود المؤسسية — مستوى لكل ملف مريض.',
@@ -819,7 +904,7 @@ const translations: Record<Language, Record<string, string>> = {
     'tourism.section7.title': 'تميز قابل للقياس',
     'tourism.cta.final.title': 'هذه ليست إجازة',
     'tourism.cta.final.subtitle': 'مع جراحة على الهامش.',
-    'tourism.cta.final.desc': 'إنه برنامج رعاية صحية مُمكَّن تقنياً ومحكوم دولياً مصمم للمواطن العالمي الحديث. نقدم الشفافية حيث يسود عادةً الغموض، والاستمرارية حيث توجد عادةً فجوة.',
+    'tourism.cta.final.desc': 'إنه برنامج رعاية صحية مُمكَّن تقنياً ومحكوم دولياً مصمم للمواطن العالمي الحديث.',
     'tourism.cta.final.review': 'ابدأ مراجعة حالتك المجانية',
     'tourism.cta.final.brochure': 'تحميل كتيب البرنامج',
 
@@ -848,7 +933,7 @@ const translations: Record<Language, Record<string, string>> = {
     'research.hero.title': 'تطوير الطب من خلال الابتكار',
     'research.hero.subtitle': 'نبني نظاماً بحثياً عالمي المستوى، نسد الفجوة بين الاستقصاء السريري ونتائج المرضى.',
     'research.vision.title': 'رؤيتنا البحثية',
-    'research.vision.p1': 'في كابيتال ميد، البحث هو حجر الزاوية في سعينا نحو التميز الطبي. نؤسس مركزاً للاكتشاف حيث يتعاون ألمع العقول لحل أكثر تحديات الرعاية الصحية إلحاحاً.',
+    'research.vision.p1': 'في كابيتال ميد، البحث هو حجر الزاوية في سعينا نحو التميز الطبي.',
     'research.vision.p2': 'من خلال الشراكات الاستراتيجية والمرافق الحديثة، نعيد تعريف معايير البحث الطبي في الشرق الأوسط وأفريقيا.',
     'research.areas.title': 'مجالات البحث ذات الأولوية',
     'research.areas.oncology': 'أبحاث الأورام',
@@ -878,7 +963,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Insurance
     'insurance.hero.label': 'وعد الشفافية المالية',
     'insurance.hero.title': 'أسعار واضحة، بدون مفاجآت.',
-    'insurance.hero.subtitle': 'ركز على صحتك، نحن نتولى الباقي. فرقنا المتخصصة تضمن تجربة فوترة سلسة.',
+    'insurance.hero.subtitle': 'ركز على صحتك، نحن نتولى الباقي.',
     'insurance.check': 'تحقق من التأمين',
     'insurance.billing': 'عملية الفوترة',
     'insurance.search.title': 'هل تأمينك مقبول؟',
@@ -1001,7 +1086,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Careers
     'careers.hero.title': 'انضم إلى مهمتنا',
-    'careers.hero.subtitle': 'ساعدنا في تشكيل مستقبل الرعاية الصحية في كابيتال ميد.',
+    'careers.hero.subtitle': 'ساعدنا في تشكيل مستقبل الرعاية الصحية في كابيتال ميد. نعمل على خلق أكثر من ١٥,٠٠٠ وظيفة.',
     'careers.search.placeholder': 'ابحث عن وظائف...',
     'careers.filter.allDepts': 'كل الأقسام',
     'careers.filter.medical': 'طبي',
@@ -1053,7 +1138,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Common
     'common.search': 'بحث',
 
-    // Miscs discovered
+    // Miscs
     'misc.healthcareExcellence': 'التميز في الرعاية الصحية',
     'misc.researchInnovation': 'البحث والابتكار',
     'misc.pageNotFound': 'عذراً! الصفحة غير موجودة',
@@ -1081,16 +1166,95 @@ const translations: Record<Language, Record<string, string>> = {
     'lang.en': 'الإنجليزية',
     'lang.fr': 'الفرنسية',
     'lang.de': 'الألمانية',
+
+    // Hotline
+    'hotline.label': 'الخط الساخن لكابيتال ميد',
+    'hotline.available': 'متاح على مدار الساعة للطوارئ والاستفسارات',
+
+    // Success Stories
+    'stories.label': 'شهادات المرضى',
+    'stories.title': 'قصص النجاح',
+    'stories.subtitle': 'تجارب حقيقية من مرضانا وعائلاتهم',
+    'stories.1.quote': 'فريق القلب في كابيتال ميد أنقذ حياتي. مستوى الرعاية والتكنولوجيا هنا عالمي حقاً. من التشخيص إلى التعافي، كل خطوة تمت بدقة وتعاطف.',
+    'stories.1.name': 'أحمد حسن',
+    'stories.1.treatment': 'جراحة القلب',
+    'stories.2.quote': 'القدوم من دبي للعلاج كان أفضل قرار. فريق السياحة العلاجية تعامل مع كل شيء — الرحلات والإقامة وخطة العلاج بالكامل. شعرت وكأنني في بيتي.',
+    'stories.2.name': 'سارة المكتوم',
+    'stories.2.treatment': 'جراحة العظام',
+    'stories.3.quote': 'حصلت ابنتي على رعاية أطفال استثنائية. جناح الأطفال مصمم ليجعل المرضى الصغار يشعرون بالراحة، والأطباء تواصلوا معنا في كل خطوة.',
+    'stories.3.name': 'فاطمة السيد',
+    'stories.3.treatment': 'أورام الأطفال',
+
+    // Accessibility
+    'accessibility.title': 'إمكانية الوصول البصرية',
+    'accessibility.fontSize': 'حجم الخط',
+    'accessibility.highContrast': 'تباين عالي',
+    'accessibility.highContrast.desc': 'زيادة تباين الألوان لقراءة أفضل',
+    'accessibility.readingMode': 'وضع القراءة',
+    'accessibility.readingMode.desc': 'تخطيط مبسط للقراءة المركزة',
+    'accessibility.reset': 'إعادة ضبط الكل',
+
+    // Patient Portal
+    'portal.label': 'صحتك، بوابتك',
+    'portal.title': 'بوابة المريض',
+    'portal.subtitle': 'الوصول إلى سجلاتك الطبية، حجز المواعيد، وإدارة رحلتك الصحية — كل ذلك في مكان واحد.',
+    'portal.access.title': 'الوصول إلى بوابتك',
+    'portal.access.desc': 'سجّل الدخول لعرض سجلاتك الصحية والمواعيد القادمة ونتائج الفحوصات والمزيد.',
+    'portal.login': 'تسجيل الدخول',
+    'portal.register': 'إنشاء حساب',
+    'portal.features.title': 'ما يمكنك فعله',
+    'portal.features.subtitle': 'كل ما تحتاجه لإدارة رعايتك الصحية في مكان واحد',
+    'portal.feature.appointments.title': 'حجز المواعيد',
+    'portal.feature.appointments.desc': 'جدولة وإدارة زياراتك بسهولة',
+    'portal.feature.records.title': 'السجلات الطبية',
+    'portal.feature.records.desc': 'الوصول إلى تاريخك الصحي الكامل بأمان',
+    'portal.feature.prescriptions.title': 'الوصفات الطبية',
+    'portal.feature.prescriptions.desc': 'عرض وتجديد أدويتك عبر الإنترنت',
+    'portal.feature.results.title': 'نتائج الفحوصات',
+    'portal.feature.results.desc': 'الحصول على نتائج المختبر والتصوير فور جاهزيتها',
+    'portal.feature.messaging.title': 'مراسلة طبيبك',
+    'portal.feature.messaging.desc': 'التواصل مباشرة مع فريق الرعاية',
+    'portal.feature.billing.title': 'الفواتير والمدفوعات',
+    'portal.feature.billing.desc': 'عرض الكشوفات وإجراء المدفوعات بأمان',
+    'portal.feature.history.title': 'سجل الزيارات',
+    'portal.feature.history.desc': 'مراجعة الزيارات السابقة وملخصات العلاج',
+    'portal.feature.insurance.title': 'معلومات التأمين',
+    'portal.feature.insurance.desc': 'إدارة تفاصيل التأمين والمطالبات',
+    'portal.cta.title': 'هل تحتاج مساعدة للبدء؟',
+    'portal.cta.desc': 'فريق خدمات المرضى متاح على مدار الساعة لمساعدتك في إعداد حساب بوابتك.',
+    'portal.cta.contact': 'تواصل مع الدعم',
+
+    // La Plaza
+    'laPlaza.badge': 'مستشفى لا بلازا',
+    'laPlaza.tagline': 'مستشفى تابع لكابيتال ميد',
   },
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+// Detect region for default language
+const detectDefaultLanguage = (): Language => {
+  const saved = localStorage.getItem('language') as Language;
+  if (saved === 'ar' || saved === 'en') return saved;
+  
+  // Try to detect based on timezone/locale
+  try {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const locale = navigator.language || '';
+    
+    // Arabic-speaking regions: Egypt, North Africa
+    const arabicTimezones = ['Africa/Cairo', 'Africa/Tripoli', 'Africa/Tunis', 'Africa/Algiers', 'Africa/Casablanca'];
+    if (arabicTimezones.some(tz => timezone.includes(tz))) return 'ar';
+    if (locale.startsWith('ar')) return 'ar';
+  } catch {
+    // fallback
+  }
+  
+  return 'en';
+};
+
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>(() => {
-    const saved = localStorage.getItem('language') as Language;
-    return saved === 'ar' || saved === 'en' ? saved : 'en';
-  });
+  const [language, setLanguageState] = useState<Language>(detectDefaultLanguage);
 
   const isRTL = language === 'ar';
 
