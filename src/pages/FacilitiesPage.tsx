@@ -50,6 +50,43 @@ const FacilitiesPage: React.FC = () => {
         </section>
 
         <section className="container mx-auto px-6 py-16">
+          {/* 19 Institutes Section */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <p className="section-label">{t('facilities.institutes.label')}</p>
+            <h2 className="section-title">{t('facilities.institutes.title')}</h2>
+            <p className="section-subtitle">{t('facilities.institutes.subtitle')}</p>
+          </motion.div>
+          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-20">
+            {[
+              { icon: Building2, key: 'universityHospital' },
+              { icon: Stethoscope, key: 'doctorsPlaza' },
+              { icon: Activity, key: 'rehabWellness' },
+              { icon: Cpu, key: 'virtualHospital' },
+              { icon: Brain, key: 'simulationCenter' },
+              { icon: Syringe, key: 'emergencyTrauma' },
+              { icon: Bone, key: 'orthoMusculoskeletal' },
+              { icon: Heart, key: 'cardiovascularPulmonary' },
+              { icon: Heart, key: 'transplant' },
+              { icon: FlaskConical, key: 'precisionMedicine' },
+              { icon: Ribbon, key: 'oncology' },
+              { icon: Baby, key: 'womenChildren' },
+              { icon: Eye, key: 'dentistryMaxillofacial' },
+              { icon: Users, key: 'geriatric' },
+              { icon: Brain, key: 'behavioralMental' },
+              { icon: FlaskConical, key: 'healthcareResearch' },
+              { icon: Hotel, key: 'assistedLiving' },
+              { icon: Users, key: 'longTermCare' },
+              { icon: Users, key: 'advancedNursing' },
+            ].map((inst) => (
+              <motion.div key={inst.key} variants={fadeUp} whileHover={{ y: -3 }} className="premium-card p-5">
+                <inst.icon className="w-6 h-6 text-accent mb-3" />
+                <h3 className="font-semibold text-sm mb-1">{t(`facilities.inst.${inst.key}`)}</h3>
+                <p className="text-xs text-muted-foreground">{t(`facilities.inst.${inst.key}.desc`)}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="rounded-xl overflow-hidden shadow-lg mb-16">
             <img src={capitalmedHotel} alt="CapitalMed Hotel" className="w-full h-[300px] md:h-[400px] object-cover" />
