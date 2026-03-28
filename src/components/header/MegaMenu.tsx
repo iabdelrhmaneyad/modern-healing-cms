@@ -35,6 +35,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
     {
       title: 'Resources',
       items: [
+        { icon: User, label: t('nav.patientPortal'), href: '/patient-portal', desc: 'Access your health records' },
         { icon: Shield, label: t('nav.insurance'), href: '/insurance', desc: 'Insurance & billing info' },
         { icon: Newspaper, label: t('nav.news'), href: '/news', desc: 'Latest updates & press' },
         { icon: Briefcase, label: t('nav.careers'), href: '/careers', desc: 'Join our team' },

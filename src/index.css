@@ -245,3 +245,51 @@
     @apply bg-muted-foreground/30;
   }
 }
+
+/* Accessibility: High Contrast Mode */
+html.high-contrast {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 5%;
+  --card-foreground: 0 0% 100%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 85%;
+  --border: 0 0% 40%;
+  --primary: 200 100% 60%;
+  --accent: 50 100% 60%;
+}
+
+html.high-contrast * {
+  border-color: hsl(0 0% 40%) !important;
+}
+
+html.high-contrast img {
+  filter: contrast(1.2);
+}
+
+/* Accessibility: Reading Mode */
+html.reading-mode body {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 110%;
+  line-height: 1.8;
+}
+
+html.reading-mode header,
+html.reading-mode footer,
+html.reading-mode .page-hero::before,
+html.reading-mode .page-hero::after {
+  display: none;
+}
+
+html.reading-mode .page-hero {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background: hsl(var(--muted));
+}
+
+html.reading-mode section {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}

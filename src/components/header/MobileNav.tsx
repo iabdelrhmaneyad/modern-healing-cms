@@ -31,6 +31,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
   ];
 
   const moreItems = [
+    { icon: User, label: t('nav.patientPortal'), href: '/patient-portal' },
     { icon: Building2, label: t('nav.facilities'), href: '/facilities' },
     { icon: Plane, label: t('nav.medicalTourism'), href: '/medical-tourism' },
     { icon: FlaskConical, label: t('nav.research'), href: '/research' },

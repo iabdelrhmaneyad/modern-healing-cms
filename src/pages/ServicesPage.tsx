@@ -37,6 +37,7 @@ const ServicesPage: React.FC = () => {
     { icon: Microscope, key: 'laboratory' },
     { icon: Pill, key: 'pharmacy' },
     { icon: Ear, key: 'ent' },
+    { icon: Pill, key: 'nutrition' },
   ];
 
   return (
