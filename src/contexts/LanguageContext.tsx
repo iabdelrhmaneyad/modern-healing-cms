@@ -1329,10 +1329,10 @@ const translations: Record<Language, Record<string, string>> = {
     'about.corporate.cira': 'سيرا',
     'about.corporate.cira.desc': 'القاهرة للاستثمار والتطوير العقاري ش.م.م.',
 
-    // Facilities - 19 Institutes
-    'facilities.institutes.label': '١٩ مرفقاً متكاملاً',
+    // Facilities - 26 Services Mix
+    'facilities.institutes.label': '٢٦ مرفقاً متكاملاً',
     'facilities.institutes.title': 'مزيج خدمات كابيتال ميد',
-    'facilities.institutes.subtitle': 'نظام بيئي شامل من ١٩ مرفقاً متكاملاً، كل منها يلبي احتياجات محددة',
+    'facilities.institutes.subtitle': 'نظام بيئي شامل من ٢٦ مرفقاً متكاملاً، كل منها يلبي احتياجات محددة',
     'facilities.inst.universityHospital': 'مركز المستشفى الجامعي',
     'facilities.inst.universityHospital.desc': 'المستشفى الرئيسي بأكثر من ٤٠٠٠ سرير وخدمات طبية شاملة.',
     'facilities.inst.doctorsPlaza': 'بلازا الأطباء',
