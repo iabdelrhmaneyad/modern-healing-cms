@@ -557,7 +557,6 @@ const translations: Record<Language, Record<string, string>> = {
     'lang.en': 'English',
     'lang.fr': 'Français',
     'lang.de': 'Deutsch',
-    'hero.smartCity': 'Smart Healthcare City',
 
     // Hotline
     'hotline.label': 'CAPITALMED Hotline',
