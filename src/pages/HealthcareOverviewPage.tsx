@@ -202,7 +202,7 @@ const HealthcareOverviewPage: React.FC = () => {
         </motion.div>
 
         {/* Patient Aspirations */}
-        <div className="grid lg:grid-cols-2 gap-10 mb-16">
+        <div className="grid lg:grid-cols-2 gap-10 mb-20">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             <h3 className="font-semibold text-base mb-4 flex items-center gap-2"><Users className="w-5 h-5 text-accent" /> {t('healthcare.aspirations.title')}</h3>
             <ul className="space-y-2">
