@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Microscope, Stethoscope, Cpu } from 'lucide-react';
+import { GraduationCap, Microscope, Stethoscope, Cpu, Building2, Award, BookOpen, BarChart3 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -19,12 +19,23 @@ const partners = [
 ];
 
 const PartnershipsPage: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isAr = language === 'ar';
   const areas = [
     { icon: Stethoscope, title: t('partnerships.areas.clinical'), desc: t('partnerships.areas.clinical.desc') },
     { icon: Microscope, title: t('partnerships.areas.research'), desc: t('partnerships.areas.research.desc') },
     { icon: GraduationCap, title: t('partnerships.areas.education'), desc: t('partnerships.areas.education.desc') },
     { icon: Cpu, title: t('partnerships.areas.technology'), desc: t('partnerships.areas.technology.desc') },
+  ];
+
+  const brandEntities = [
+    { icon: Building2, name: isAr ? 'القلعة فينتشرز' : 'ElKalaa Ventures', desc: isAr ? 'مجموعة صناعات في الصحة والتعليم والاستثمار' : 'Group of industries in health, education & investment' },
+    { icon: Stethoscope, name: 'EHCS', desc: isAr ? 'الشركة المصرية لخدمات الرعاية الصحية — المالكة لكابيتال ميد' : 'Egyptians for Health Care Services — Owner of CAPITALMED' },
+    { icon: GraduationCap, name: isAr ? 'جامعة بدر بالقاهرة' : 'BUC (Badr University in Cairo)', desc: isAr ? 'جامعة بدر بالقاهرة' : 'Badr University in Cairo' },
+    { icon: BarChart3, name: 'CIRA', desc: isAr ? 'القاهرة للاستثمار والتطوير العقاري' : 'Cairo for Investment and Real Estate' },
+    { icon: Award, name: 'GS1 Egypt', desc: isAr ? 'جي إس وان مصر' : 'GS1 Egypt' },
+    { icon: BookOpen, name: isAr ? 'الجمعية المصرية للجودة في الرعاية الصحية' : 'Egyptian Society for Quality in Health Care', desc: isAr ? 'ESQ' : 'ESQ' },
+    { icon: BookOpen, name: isAr ? 'مؤسسة المستقبل للتعليم والتدريب والتنمية' : 'Futures Foundation', desc: isAr ? 'للتعليم والتدريب والتنمية' : 'Education Training Development' },
   ];
 
   return (
@@ -58,6 +69,30 @@ const PartnershipsPage: React.FC = () => {
                 <area.icon className="w-8 h-8 text-accent mx-auto mb-3" />
                 <h3 className="font-semibold text-sm mb-2">{area.title}</h3>
                 <p className="text-xs text-muted-foreground">{area.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Brand Architecture Section */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <p className="section-label">{isAr ? 'الهيكل المؤسسي' : 'Corporate Structure'}</p>
+            <h2 className="section-title">{isAr ? 'هيكل العلامة التجارية' : 'Brand Architecture'}</h2>
+            <p className="section-subtitle">
+              {isAr
+                ? 'مجموعة صناعات في الصحة والتعليم والاستثمار، برئاسة د. حسن القلعة'
+                : 'A group of industries in health, education & investment, headed by Dr. Hassan Al-Kalla'}
+            </p>
+          </motion.div>
+          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
+            {brandEntities.map((entity, i) => (
+              <motion.div key={i} variants={fadeUp} whileHover={{ y: -3 }} className="premium-card p-6 flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                  <entity.icon className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-sm mb-1">{entity.name}</h3>
+                  <p className="text-xs text-muted-foreground">{entity.desc}</p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
