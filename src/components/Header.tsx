@@ -59,16 +59,17 @@ const Header: React.FC = () => {
       className="sticky top-0 left-0 right-0 z-40 transition-all duration-500"
       style={{ background: 'linear-gradient(135deg, hsl(200 90% 24%) 0%, hsl(200 85% 16%) 100%)' }}
     >
-      {/* Top Bar */}
-      <div className="hidden md:block border-b border-white/10">
+      {/* Hotline + Top Bar */}
+      <div className="border-b border-white/10">
         <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between h-9 text-xs">
-            <div className="flex items-center gap-4 text-white/70">
-              <a href="tel:+201234567890" className="flex items-center gap-1.5 hover:text-accent transition-colors">
-                <Phone className="w-3 h-3" />
-                <span>+20 2 1234 5678</span>
-              </a>
-            </div>
+          <div className="flex items-center justify-between h-10 text-xs">
+            <a href="tel:16999" className="flex items-center gap-2 text-white font-bold hover:text-accent transition-colors">
+              <div className="w-6 h-6 rounded-full bg-destructive/20 flex items-center justify-center">
+                <Phone className="w-3 h-3 text-destructive animate-pulse" />
+              </div>
+              <span className="text-destructive font-bold text-sm">16999</span>
+              <span className="text-white/50 font-normal hidden sm:inline">24/7</span>
+            </a>
             <div className="flex items-center gap-3">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -92,7 +93,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo - swaps between light/dark based on scroll */}
-          <Link to="/" className="flex items-center relative h-16 md:h-20">
+          <Link to="/" className="flex items-center relative h-16 md:h-20 mb-2">
             <img
               src={lightLogo}
               alt="CapitalMed"
