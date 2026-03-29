@@ -19,6 +19,7 @@ const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.06 } }
 const NewsPage: React.FC = () => {
   const { t, language, isRTL } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
   const categories = [
