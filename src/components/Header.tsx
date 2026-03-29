@@ -98,7 +98,6 @@ const Header: React.FC = () => {
               alt="CapitalMed"
               className="h-full w-auto object-contain"
             />
-            />
           </Link>
 
           {/* Desktop Navigation */}
