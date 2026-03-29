@@ -12,7 +12,6 @@ import {
 import MegaMenu from '@/components/header/MegaMenu';
 import MobileNav from '@/components/header/MobileNav';
 import SearchBar from '@/components/SearchBar';
-import QuickAccessBar from '@/components/QuickAccessBar';
 
 const Header: React.FC = () => {
   const { language, setLanguage, t, isRTL } = useLanguage();
@@ -170,7 +169,6 @@ const Header: React.FC = () => {
       </div>
 
       <MobileNav isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
-      <QuickAccessBar />
     </motion.header>
   );
 };
