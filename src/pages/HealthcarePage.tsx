@@ -244,7 +244,7 @@ const HealthcarePage: React.FC = () => {
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={problemsData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(200 10% 85%)" />
-                  <XAxis dataKey="problem" tick={{ fontSize: 9, angle: -30 }} height={60} />
+                  <XAxis dataKey="problem" tick={{ fontSize: 9 }} height={60} />
                   <YAxis tick={{ fontSize: 11 }} domain={[0, 100]} />
                   <Tooltip />
                   <Bar dataKey="severity" fill="hsl(350, 65%, 50%)" radius={[4, 4, 0, 0]} />
