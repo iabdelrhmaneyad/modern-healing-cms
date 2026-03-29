@@ -8,16 +8,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.06 } } };
 const fadeUp = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
 
-const partners = [
-  { name: 'Johns Hopkins Medicine', country: 'USA', type: 'Academic', focus: 'Medical Research', key: true },
-  { name: 'German Heart Center', country: 'Germany', type: 'Clinical', focus: 'Cardiology', key: true },
-  { name: 'Mayo Clinic', country: 'USA', type: 'Research', focus: 'Multi-specialty', key: true },
-  { name: 'NHS Foundation Trust', country: 'UK', type: 'Healthcare', focus: 'Public Health', key: false },
-  { name: 'Charité Berlin', country: 'Germany', type: 'Academic', focus: 'Medical Education', key: false },
-  { name: 'Singapore General Hospital', country: 'Singapore', type: 'Clinical', focus: 'Multi-specialty', key: false },
-  { name: 'Cleveland Clinic', country: 'USA', type: 'Clinical', focus: 'Heart Care', key: false },
-  { name: 'Karolinska Institute', country: 'Sweden', type: 'Research', focus: 'Research', key: false },
-];
 
 const brandEntities = [
   { name: 'ElKalaa Ventures', desc: 'A group of industries in health, education, and investment, headed by Dr. Hassan Al-Kalla', icon: Building2 },
