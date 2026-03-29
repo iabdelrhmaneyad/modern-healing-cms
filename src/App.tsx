@@ -6,6 +6,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { CMSProvider } from "@/contexts/CMSContext";
+import Layout from "@/components/Layout";
 import Index from "./pages/Index";
 import AboutPage from "./pages/AboutPage";
 import ServicesPage from "./pages/ServicesPage";
@@ -39,28 +40,30 @@ const App = () => (
           <Sonner />
           <HashRouter>
             <ScrollToTop />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/doctors" element={<DoctorsPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/careers" element={<CareersPage />} />
-              <Route path="/facilities" element={<FacilitiesPage />} />
-              <Route path="/medical-tourism" element={<MedicalTourismPage />} />
-              <Route path="/news" element={<NewsPage />} />
-              <Route path="/partnerships" element={<PartnershipsPage />} />
-              <Route path="/research" element={<ResearchPage />} />
-              <Route path="/insurance" element={<InsurancePage />} />
-              <Route path="/investment" element={<InvestmentPage />} />
-              <Route path="/development-phases" element={<DevelopmentPhasesPage />} />
-              <Route path="/location" element={<LocationPage />} />
-              <Route path="/faq" element={<FAQPage />} />
-              <Route path="/campus-map" element={<CampusMapPage />} />
-              <Route path="/patient-portal" element={<PatientPortalPage />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/doctors" element={<DoctorsPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/careers" element={<CareersPage />} />
+                <Route path="/facilities" element={<FacilitiesPage />} />
+                <Route path="/medical-tourism" element={<MedicalTourismPage />} />
+                <Route path="/news" element={<NewsPage />} />
+                <Route path="/partnerships" element={<PartnershipsPage />} />
+                <Route path="/research" element={<ResearchPage />} />
+                <Route path="/insurance" element={<InsurancePage />} />
+                <Route path="/investment" element={<InvestmentPage />} />
+                <Route path="/development-phases" element={<DevelopmentPhasesPage />} />
+                <Route path="/location" element={<LocationPage />} />
+                <Route path="/faq" element={<FAQPage />} />
+                <Route path="/campus-map" element={<CampusMapPage />} />
+                <Route path="/patient-portal" element={<PatientPortalPage />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
             <Chatbot />
             <AccessibilityWidget />
           </HashRouter>
