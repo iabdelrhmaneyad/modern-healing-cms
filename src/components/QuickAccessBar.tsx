@@ -44,14 +44,6 @@ const QuickAccessBar: React.FC = () => {
             })}
           </div>
 
-          {/* Hotline */}
-          <a
-            href="tel:16999"
-            className="hidden sm:flex items-center gap-2 px-4 py-1.5 bg-destructive/10 rounded-full hover:bg-destructive/20 transition-colors group"
-          >
-            <Phone className="w-3.5 h-3.5 text-destructive animate-pulse" />
-            <span className="text-xs font-bold text-destructive">{t('quick.bar.hotline')}: 16999</span>
-          </a>
         </div>
       </div>
     </motion.div>

@@ -56,7 +56,7 @@ const Header: React.FC = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="sticky top-0 left-0 right-0 z-50 transition-all duration-500"
+      className="sticky top-0 left-0 right-0 z-40 transition-all duration-500"
       style={{ background: 'linear-gradient(135deg, hsl(200 90% 24%) 0%, hsl(200 85% 16%) 100%)' }}
     >
       {/* Top Bar */}
