@@ -19,6 +19,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
     {
       title: t('nav.services'),
       items: [
+        { icon: HeartPulse, label: isRTL ? 'نظام الرعاية الصحية' : 'Healthcare Overview', href: '/healthcare', desc: 'Research & market analysis' },
         { icon: Building2, label: t('nav.facilities'), href: '/facilities', desc: 'World-class medical facilities' },
         { icon: Plane, label: t('nav.medicalTourism'), href: '/medical-tourism', desc: 'International patient services' },
         { icon: FlaskConical, label: t('nav.research'), href: '/research', desc: 'Innovation & clinical trials' },
