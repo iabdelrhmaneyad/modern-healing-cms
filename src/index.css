@@ -142,8 +142,15 @@
 @layer components {
   /* Premium Page Hero with wave divider */
   .page-hero {
-    @apply relative pt-36 pb-24 overflow-hidden;
+    @apply relative pt-36 pb-24 overflow-hidden -mt-[calc(2.25rem+5rem)] md:-mt-[calc(2.25rem+6rem)];
+    padding-top: calc(9rem + 2.25rem + 5rem);
     background: linear-gradient(135deg, hsl(200 90% 24%) 0%, hsl(200 85% 16%) 100%);
+  }
+
+  @media (min-width: 768px) {
+    .page-hero {
+      padding-top: calc(9rem + 2.25rem + 6rem);
+    }
   }
 
   .page-hero::before {
