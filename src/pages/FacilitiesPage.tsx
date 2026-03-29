@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Hotel, ShoppingBag, UtensilsCrossed, Car, Wifi, Coffee, Flower2, Building2, Heart, Brain, Baby, Bone, Ribbon, FlaskConical, Syringe, Stethoscope, Eye, Ear, Activity, Cpu, Users, GraduationCap, Monitor, Store, Wrench, Expand } from 'lucide-react';
-import PageLayout from '@/components/PageLayout';
+import { Hotel, ShoppingBag, UtensilsCrossed, Car, Wifi, Coffee, Flower2 } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
 import capitalmedHotel from '@/assets/campus-img-10.jpeg';
 import rehabCenter from '@/assets/rehab-gym.jpeg';
@@ -34,7 +35,8 @@ const FacilitiesPage: React.FC = () => {
   ];
 
   return (
-    <PageLayout>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-background">
+      <Header />
       <main>
         <section className="page-hero">
           <div className="container mx-auto px-6 relative z-10 text-center">
@@ -48,50 +50,6 @@ const FacilitiesPage: React.FC = () => {
         </section>
 
         <section className="container mx-auto px-6 py-16">
-          {/* 19 Institutes Section */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <p className="section-label">{t('facilities.institutes.label')}</p>
-            <h2 className="section-title">{t('facilities.institutes.title')}</h2>
-            <p className="section-subtitle">{t('facilities.institutes.subtitle')}</p>
-          </motion.div>
-          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-20">
-            {[
-              { icon: Building2, key: 'universityHospital' },
-              { icon: Stethoscope, key: 'doctorsPlaza' },
-              { icon: Activity, key: 'rehabWellness' },
-              { icon: Cpu, key: 'virtualHospital' },
-              { icon: Brain, key: 'simulationCenter' },
-              { icon: Syringe, key: 'emergencyTrauma' },
-              { icon: Bone, key: 'orthoMusculoskeletal' },
-              { icon: Brain, key: 'neuroSpine' },
-              { icon: Heart, key: 'cardiovascularPulmonary' },
-              { icon: Heart, key: 'transplant' },
-              { icon: FlaskConical, key: 'precisionMedicine' },
-              { icon: Ribbon, key: 'oncology' },
-              { icon: GraduationCap, key: 'hrDevelopment' },
-              { icon: Hotel, key: 'assistedLiving' },
-              { icon: Users, key: 'longTermCare' },
-              { icon: Users, key: 'advancedNursing' },
-              { icon: Baby, key: 'womenChildren' },
-              { icon: Eye, key: 'dentistryMaxillofacial' },
-              { icon: Users, key: 'geriatric' },
-              { icon: Brain, key: 'behavioralMental' },
-              { icon: FlaskConical, key: 'healthcareResearch' },
-              { icon: Monitor, key: 'centralCommand' },
-              { icon: Hotel, key: 'hotelResidential' },
-              { icon: Store, key: 'shoppingMall' },
-              { icon: Wrench, key: 'utilityBuildings' },
-              { icon: Expand, key: 'futureExpansion' },
-            ].map((inst) => (
-              <motion.div key={inst.key} variants={fadeUp} whileHover={{ y: -3 }} className="premium-card p-5">
-                <inst.icon className="w-6 h-6 text-accent mb-3" />
-                <h3 className="font-semibold text-sm mb-1">{t(`facilities.inst.${inst.key}`)}</h3>
-                <p className="text-xs text-muted-foreground">{t(`facilities.inst.${inst.key}.desc`)}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="rounded-xl overflow-hidden shadow-lg mb-16">
             <img src={capitalmedHotel} alt="CapitalMed Hotel" className="w-full h-[300px] md:h-[400px] object-cover" />
@@ -160,7 +118,8 @@ const FacilitiesPage: React.FC = () => {
           </motion.div>
         </section>
       </main>
-    </PageLayout>
+      <Footer />
+    </motion.div>
   );
 };
 

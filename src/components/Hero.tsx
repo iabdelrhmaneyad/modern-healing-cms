@@ -85,7 +85,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-display text-white mb-3 sm:mb-4 tracking-tight leading-[1.1] drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-3 sm:mb-4 tracking-tight leading-[1.1] drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
           >
             {t('hero.title')}
           </motion.h1>
@@ -132,13 +132,13 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap gap-5 sm:gap-8 mt-8 sm:mt-12 pt-6 sm:pt-8 mb-20 sm:mb-24 border-t border-white/10"
+            className="flex flex-wrap gap-5 sm:gap-8 mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10"
           >
             {[
-              { value: t('hero.stats.area'), label: t('hero.stat.campusArea') },
-              { value: t('hero.stats.investment'), label: t('hero.stat.investment') },
-              { value: '4,000+', label: t('stats.beds') },
-              { value: '15,000+', label: t('stats.providers') },
+              { value: '577K m²', label: 'Campus Area' },
+              { value: '$1.2B', label: 'Investment' },
+              { value: '4,500+', label: 'Hospital Beds' },
+              { value: '100+', label: 'Specialties' },
             ].map((stat, i) => (
               <motion.div
                 key={i}

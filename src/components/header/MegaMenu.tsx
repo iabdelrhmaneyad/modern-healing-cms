@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Building2, Plane, FlaskConical, Handshake, Layers, TrendingUp,
-  Shield, Newspaper, Briefcase, MapPin, HelpCircle, User, BarChart3
+  Shield, Newspaper, Briefcase, MapPin, HelpCircle, User
 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -19,29 +19,28 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
     {
       title: t('nav.services'),
       items: [
-        { icon: Building2, label: t('nav.facilities'), href: '/facilities', desc: t('mega.facilities.desc') },
-        { icon: Plane, label: t('nav.medicalTourism'), href: '/medical-tourism', desc: t('mega.medicalTourism.desc') },
-        { icon: FlaskConical, label: t('nav.research'), href: '/research', desc: t('mega.research.desc') },
+        { icon: Building2, label: t('nav.facilities'), href: '/facilities', desc: 'World-class medical facilities' },
+        { icon: Plane, label: t('nav.medicalTourism'), href: '/medical-tourism', desc: 'International patient services' },
+        { icon: FlaskConical, label: t('nav.research'), href: '/research', desc: 'Innovation & clinical trials' },
       ],
     },
     {
-      title: t('mega.corporate'),
+      title: 'Corporate',
       items: [
-        { icon: Handshake, label: t('nav.partnerships'), href: '/partnerships', desc: t('mega.partnerships.desc') },
-        { icon: Layers, label: t('nav.developmentPhases'), href: '/development-phases', desc: t('mega.devPhases.desc') },
-        { icon: TrendingUp, label: t('nav.investment'), href: '/investment', desc: t('mega.investment.desc') },
-        { icon: BarChart3, label: t('nav.healthcareOverview'), href: '/healthcare-overview', desc: t('mega.healthcareOverview.desc') },
+        { icon: Handshake, label: t('nav.partnerships'), href: '/partnerships', desc: 'Global collaborations' },
+        { icon: Layers, label: t('nav.developmentPhases'), href: '/development-phases', desc: 'Project milestones' },
+        { icon: TrendingUp, label: t('nav.investment'), href: '/investment', desc: 'Investor relations' },
       ],
     },
     {
-      title: t('mega.resources'),
+      title: 'Resources',
       items: [
-        { icon: User, label: t('nav.patientPortal'), href: '/patient-portal', desc: t('mega.patientPortal.desc') },
-        { icon: Shield, label: t('nav.insurance'), href: '/insurance', desc: t('mega.insurance.desc') },
-        { icon: Newspaper, label: t('nav.news'), href: '/news', desc: t('mega.news.desc') },
-        { icon: Briefcase, label: t('nav.careers'), href: '/careers', desc: t('mega.careers.desc') },
-        { icon: MapPin, label: t('nav.location'), href: '/location', desc: t('mega.location.desc') },
-        { icon: HelpCircle, label: t('nav.faq'), href: '/faq', desc: t('mega.faq.desc') },
+        { icon: User, label: t('nav.patientPortal'), href: '/patient-portal', desc: 'Access your health records' },
+        { icon: Shield, label: t('nav.insurance'), href: '/insurance', desc: 'Insurance & billing info' },
+        { icon: Newspaper, label: t('nav.news'), href: '/news', desc: 'Latest updates & press' },
+        { icon: Briefcase, label: t('nav.careers'), href: '/careers', desc: 'Join our team' },
+        { icon: MapPin, label: t('nav.location'), href: '/location', desc: 'Find us & directions' },
+        { icon: HelpCircle, label: t('nav.faq'), href: '/faq', desc: 'Frequently asked questions' },
       ],
     },
   ];

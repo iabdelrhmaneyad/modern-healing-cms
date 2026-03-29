@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, MessageCircle, Phone, ArrowRight } from 'lucide-react';
-import PageLayout from '@/components/PageLayout';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -33,7 +34,8 @@ const FAQPage: React.FC = () => {
   const filteredFaqs = faqs.filter(f => f.q.toLowerCase().includes(search.toLowerCase()) || f.a.toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <PageLayout>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-background">
+      <Header />
       <main>
         {/* Hero */}
         <section className="page-hero">
@@ -84,7 +86,8 @@ const FAQPage: React.FC = () => {
           </motion.div>
         </section>
       </main>
-    </PageLayout>
+      <Footer />
+    </motion.div>
   );
 };
 

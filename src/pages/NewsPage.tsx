@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, User, ArrowRight, ChevronDown, X } from 'lucide-react';
-import PageLayout from '@/components/PageLayout';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -19,7 +20,6 @@ const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.06 } }
 const NewsPage: React.FC = () => {
   const { t, language, isRTL } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
   const categories = [
@@ -77,15 +77,11 @@ const NewsPage: React.FC = () => {
       },
     ];
 
-  const filtered = articles.filter(a => {
-    const matchesCategory = activeCategory === 'All' || a.category === activeCategory;
-    const query = searchQuery.toLowerCase();
-    const matchesSearch = !query || a.title.toLowerCase().includes(query) || a.excerpt.toLowerCase().includes(query) || a.author.toLowerCase().includes(query);
-    return matchesCategory && matchesSearch;
-  });
+  const filtered = activeCategory === 'All' ? articles : articles.filter(a => a.category === activeCategory);
 
   return (
-    <PageLayout>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-background">
+      <Header />
       <main>
         <section className="page-hero">
           <div className="container mx-auto px-6 relative z-10 text-center">
@@ -98,27 +94,13 @@ const NewsPage: React.FC = () => {
           </div>
         </section>
         <section className="container mx-auto px-6 py-10">
-          {/* Search */}
-          <div className="max-w-md mx-auto mb-6">
-            <Input
-              placeholder={language === 'ar' ? 'ابحث في الأخبار...' : 'Search news...'}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="rounded-[8px]"
-            />
-          </div>
-          {/* Categories */}
-          <div className="flex flex-wrap gap-2 justify-center mb-6">
+          <div className="flex flex-wrap gap-2 justify-center mb-10">
             {categories.map(cat => (
               <Button key={cat.key} variant={activeCategory === cat.key ? 'default' : 'outline'} size="sm"
-                onClick={() => { setActiveCategory(cat.key); setSearchQuery(''); }} className="rounded-[8px] text-xs">{cat.label}</Button>
+                onClick={() => setActiveCategory(cat.key)} className="rounded-[8px] text-xs">{cat.label}</Button>
             ))}
           </div>
-          {/* Results count */}
-          <p className="text-center text-xs text-muted-foreground mb-8">
-            {language === 'ar' ? `عرض ${filtered.length} نتيجة` : `Showing ${filtered.length} result${filtered.length !== 1 ? 's' : ''}`}
-          </p>
-          <motion.div variants={stagger} initial="hidden" animate="visible" className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
+          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
             {filtered.map((article) => (
               <motion.article key={article.id} variants={fadeUp} whileHover={expandedId !== article.id ? { y: -3 } : {}}
                 layout className="premium-card overflow-hidden p-0">
@@ -188,7 +170,8 @@ const NewsPage: React.FC = () => {
           </motion.div>
         </section>
       </main>
-    </PageLayout>
+      <Footer />
+    </motion.div>
   );
 };
 

@@ -12,11 +12,11 @@ interface StatItem {
 }
 
 const statsData: StatItem[] = [
-  { value: 5000000, suffix: '+', labelKey: 'stats.patients', icon: Activity },
-  { value: 4000, suffix: '+', labelKey: 'stats.beds', icon: BedDouble },
-  { value: 700, suffix: '+', labelKey: 'stats.icu', icon: Siren },
-  { value: 70, suffix: '+', labelKey: 'stats.operating', icon: Building2 },
-  { value: 15000, suffix: '+', labelKey: 'stats.providers', icon: Users },
+  { value: 500000, suffix: '+', labelKey: 'stats.patients', icon: Activity },
+  { value: 4500, suffix: '+', labelKey: 'stats.beds', icon: BedDouble },
+  { value: 450, suffix: '+', labelKey: 'stats.icu', icon: Siren },
+  { value: 120, suffix: '+', labelKey: 'stats.operating', icon: Building2 },
+  { value: 3000, suffix: '+', labelKey: 'stats.providers', icon: Users },
   { value: 100, suffix: '+', labelKey: 'stats.specialties', icon: Stethoscope },
 ];
 

@@ -1,41 +1,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { HeartPulse, Stethoscope, CalendarCheck, Siren, Phone } from 'lucide-react';
+import { Users, Stethoscope, CalendarCheck, Siren, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-interface QuickAccessBarProps {
-  isScrolled?: boolean;
-}
-
-const QuickAccessBar: React.FC<QuickAccessBarProps> = ({ isScrolled = false }) => {
+const QuickAccessBar: React.FC = () => {
   const { t, isRTL } = useLanguage();
-  const neutralActionTone = isScrolled
-    ? 'bg-muted text-foreground hover:bg-muted/80'
-    : 'bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground';
-  const hotlineSurface = isScrolled
-    ? 'bg-muted hover:bg-muted/80'
-    : 'bg-primary-foreground/10 hover:bg-primary-foreground/20';
-  const hotlineText = isScrolled ? 'text-foreground' : 'text-primary-foreground';
-  const hotlineIcon = isScrolled ? 'text-primary animate-pulse' : 'text-primary-foreground animate-pulse';
 
   const actions = [
-    { icon: HeartPulse, label: t('quick.bar.patients'), href: '/patient-portal', color: neutralActionTone },
-    { icon: Stethoscope, label: t('quick.bar.doctors'), href: '/doctors', color: neutralActionTone },
+    { icon: Users, label: t('quick.bar.patients'), href: '/patient-portal', color: 'bg-primary hover:bg-primary/90 text-primary-foreground' },
+    { icon: Stethoscope, label: t('quick.bar.doctors'), href: '/doctors', color: 'bg-secondary hover:bg-secondary/90 text-secondary-foreground' },
     { icon: CalendarCheck, label: t('quick.bar.bookNow'), href: '/contact', color: 'bg-accent hover:bg-accent/90 text-accent-foreground' },
     { icon: Siren, label: t('quick.bar.emergency'), href: 'tel:16999', color: 'bg-destructive hover:bg-destructive/90 text-destructive-foreground', isExternal: true },
   ];
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.3 }}
-      className={`sticky top-0 z-[60] border-b shadow-sm transition-[background-color,border-color,box-shadow] duration-300 ${
-        isScrolled
-          ? 'bg-background/95 border-border/80 backdrop-blur-lg'
-          : 'bg-primary/95 border-primary/20 backdrop-blur-sm'
-      }`}
+      className="bg-card border-b border-border shadow-sm sticky top-[5rem] md:top-[6rem] z-40"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-12 gap-2">
@@ -65,10 +49,10 @@ const QuickAccessBar: React.FC<QuickAccessBarProps> = ({ isScrolled = false }) =
           {/* Hotline */}
           <a
             href="tel:16999"
-            className={`hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-full transition-colors group ${hotlineSurface}`}
+            className="hidden sm:flex items-center gap-2 px-4 py-1.5 bg-destructive/10 rounded-full hover:bg-destructive/20 transition-colors group"
           >
-            <Phone className={`w-3.5 h-3.5 ${hotlineIcon}`} />
-            <span className={`text-xs font-bold ${hotlineText}`}>{t('quick.bar.hotline')}: 16999</span>
+            <Phone className="w-3.5 h-3.5 text-destructive animate-pulse" />
+            <span className="text-xs font-bold text-destructive">{t('quick.bar.hotline')}: 16999</span>
           </a>
         </div>
       </div>

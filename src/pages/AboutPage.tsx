@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Target, Eye, Heart, Award, Users, Building2, Stethoscope, ShieldCheck, Briefcase, GraduationCap, Landmark, Globe } from 'lucide-react';
-import PageLayout from '@/components/PageLayout';
+import { Target, Eye, Heart, Award, Users, Building2, Stethoscope, ShieldCheck } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
 import hospitalPhase1 from '@/assets/campus-aerial-day2.jpeg';
 
@@ -26,7 +27,8 @@ const AboutPage: React.FC = () => {
   ];
 
   return (
-    <PageLayout>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-background">
+      <Header />
 
       <section className="page-hero">
         <div className="container mx-auto px-6 relative z-10 text-center">
@@ -129,66 +131,15 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Key Facts from PDF */}
-      <section className="py-20 bg-muted/50">
-        <div className="container mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="section-title">{t('about.keyFacts.title')}</h2>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { icon: Building2, value: '577,000 m²', label: t('about.keyFacts.landArea') },
-              { icon: Globe, value: '1,210,600 m²', label: t('about.keyFacts.builtUp') },
-              { icon: Users, value: '15,000+', label: t('about.keyFacts.jobs') },
-              { icon: Stethoscope, value: '5M+', label: t('about.keyFacts.patientsAnnually') },
-              { icon: Heart, value: '10%', label: t('about.keyFacts.underprivileged') },
-              { icon: Award, value: '70%', label: t('about.keyFacts.greenAreas') },
-            ].map((fact, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                className="premium-card p-6 text-center">
-                <fact.icon className="w-6 h-6 text-primary mx-auto mb-3" />
-                <div className="text-2xl font-bold text-primary mb-1">{fact.value}</div>
-                <div className="text-muted-foreground text-sm">{fact.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Corporate Structure / Brand Architecture */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="section-title">{t('about.corporate.title')}</h2>
-            <p className="section-subtitle">{t('about.corporate.subtitle')}</p>
-          </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
-              { icon: Landmark, name: t('about.corporate.elkalaa'), desc: t('about.corporate.elkalaa.desc') },
-              { icon: Briefcase, name: t('about.corporate.ehcs'), desc: t('about.corporate.ehcs.desc') },
-              { icon: GraduationCap, name: t('about.corporate.buc'), desc: t('about.corporate.buc.desc') },
-              { icon: Building2, name: t('about.corporate.cira'), desc: t('about.corporate.cira.desc') },
-            ].map((entity, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -3 }} className="premium-card p-6 text-center">
-                <entity.icon className="w-8 h-8 text-accent mx-auto mb-3" />
-                <h3 className="font-semibold text-sm mb-2">{entity.name}</h3>
-                <p className="text-xs text-muted-foreground">{entity.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Stats */}
-      <section className="py-20 bg-muted/50">
+      <section className="py-20">
         <div className="container mx-auto px-6">
           <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}
             className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: Building2, value: '19', label: t('about.stat.facilities') },
-              { icon: Stethoscope, value: '15,000+', label: t('about.stat.providers') },
-              { icon: Users, value: '5M+', label: t('about.stat.patients') },
+              { icon: Building2, value: '577,000', label: t('about.stat.area') },
+              { icon: Stethoscope, value: '3,000+', label: t('about.stat.providers') },
+              { icon: Users, value: '500,000+', label: t('about.stat.patients') },
               { icon: Award, value: '100+', label: t('about.stat.specialties') },
             ].map((stat) => (
               <motion.div key={stat.label} variants={fadeUp} className="text-center">
@@ -201,7 +152,8 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-    </PageLayout>
+      <Footer />
+    </motion.div>
   );
 };
 
