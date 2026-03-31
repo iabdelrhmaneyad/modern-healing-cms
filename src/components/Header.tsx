@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 import lightLogo from '@/assets/light_logo.svg';
+import darkLogo from '@/assets/dark_logo.svg';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
@@ -34,6 +35,7 @@ const Header: React.FC = () => {
   const mainNavItems = [
     { label: t('nav.home'), href: '/' },
     { label: t('nav.about'), href: '/about' },
+    { label: t('nav.laplaza'), href: '/laplaza' },
     { label: t('nav.services'), href: '/services' },
     { label: t('nav.doctors'), href: '/doctors' },
     { label: t('nav.contact'), href: '/contact' },
@@ -48,61 +50,85 @@ const Header: React.FC = () => {
     megaMenuTimeout.current = setTimeout(() => setIsMegaMenuOpen(false), 200);
   };
 
-  const textColor = 'text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]';
-  const hoverColor = 'hover:text-white/70';
+  const textColor = isScrolled
+    ? 'text-foreground'
+    : 'text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]';
+  const hoverColor = isScrolled ? 'hover:text-foreground/70' : 'hover:text-white/70';
+  const headerClasses = [
+    'site-header fixed inset-x-0 top-0 z-50 transition-all duration-300',
+    isScrolled ? 'site-header--scrolled' : 'site-header--top',
+  ].join(' ');
 
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="sticky top-0 left-0 right-0 z-40 transition-all duration-500"
-      style={{ background: 'linear-gradient(135deg, hsl(200 90% 24%) 0%, hsl(200 85% 16%) 100%)' }}
+      className={headerClasses}
     >
       {/* Hotline + Top Bar */}
-      <div className="border-b border-white/10">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between h-10 text-xs">
-            <a href="tel:16999" className="flex items-center gap-2 text-white font-bold hover:text-accent transition-colors">
-              <div className="w-6 h-6 rounded-full bg-destructive/20 flex items-center justify-center">
-                <Phone className="w-3 h-3 text-destructive animate-pulse" />
-              </div>
-              <span className="text-destructive font-bold text-sm">16999</span>
-              <span className="text-white/50 font-normal hidden sm:inline">24/7</span>
-            </a>
-            <div className="flex items-center gap-3">
+      <div className={`border-b ${isScrolled ? 'border-border/20' : 'border-white/10'}`}>
+        <div className="container">
+          <div className="header-utility-bar text-xs">
+            <div className="header-utility-bar__language">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className={`h-7 text-xs ${textColor}`}>
+                  <Button variant="ghost" size="sm" className={`h-8 text-xs ${textColor}`}>
                     <Globe className="w-3.5 h-3.5 mr-1" />
-                    {language === 'en' ? 'EN' : 'عربي'}
+                    {language === 'en' ? 'EN' : language === 'fr' ? 'FR' : 'عربي'}
                     <ChevronDown className="w-3 h-3 ml-0.5" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align={isRTL ? 'start' : 'end'} className="bg-popover">
                   <DropdownMenuItem onClick={() => setLanguage('en')}>English</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLanguage('fr')}>Français</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => setLanguage('ar')}>العربية</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
+
+            <a href="tel:16999" className={`header-utility-bar__phone font-bold transition-colors ${isScrolled ? 'text-foreground hover:text-accent' : 'text-white hover:text-accent'}`}>
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-destructive/20">
+                <Phone className="w-3 h-3 text-destructive animate-pulse" />
+              </div>
+              <span className="text-destructive font-bold text-sm">16999</span>
+              <span className={`${isScrolled ? 'text-muted-foreground' : 'text-white/50'} font-normal hidden sm:inline`}>24/7</span>
+            </a>
           </div>
         </div>
       </div>
 
       {/* Main Navigation */}
-      <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-20 md:h-24">
-          {/* Logo - swaps between light/dark based on scroll */}
-          <Link to="/" className="flex items-center relative h-16 md:h-20 mb-2">
-            <img
-              src={lightLogo}
-              alt="CapitalMed"
-              className="h-full w-auto object-contain"
-            />
-          </Link>
+      <div className="container">
+        <div className="flex min-h-[4.75rem] items-center justify-between gap-4 py-3 md:min-h-[5.5rem]">
+          {/* Logo + optional sub-brand */}
+          <div className="flex shrink-0 items-center gap-3">
+            <Link to="/" className="flex items-center relative h-14 md:h-[4.5rem]">
+              <img
+                src={isScrolled ? darkLogo : lightLogo}
+                alt="CapitalMed"
+                className="h-full w-auto object-contain transition-opacity duration-300"
+              />
+            </Link>
+
+            {/* La Plaza sub-brand — shown only on /laplaza */}
+            {location.pathname === '/laplaza' && (
+              <div className={`flex items-center gap-2.5 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <div className={`h-8 w-px ${isScrolled ? 'bg-border' : 'bg-white/25'}`} />
+                <div className={isRTL ? 'text-right' : 'text-left'}>
+                  <p className={`text-[8px] font-semibold tracking-[0.2em] uppercase leading-none mb-0.5 ${isScrolled ? 'text-muted-foreground' : 'text-white/50'}`}>
+                    {language === 'ar' ? 'مستشفى تابع لكابيتال ميد' : language === 'fr' ? 'Un Hôpital CAPITALMED' : 'A CAPITALMED Hospital'}
+                  </p>
+                  <p className={`text-sm font-bold tracking-[0.12em] uppercase leading-none ${isScrolled ? 'text-foreground' : 'text-white'}`}>
+                    {language === 'ar' ? 'لا بلازا' : 'LA PLAZA'}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
             {mainNavItems.map((item) => (
               <Link
                 key={item.href}
@@ -129,22 +155,22 @@ const Header: React.FC = () => {
           </nav>
 
           {/* Search + CTA */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-4">
             <SearchBar />
-            <Link to="/doctors">
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-[8px] px-6 text-sm font-semibold">
-                {t('hero.cta.doctor')}
+            <Link to="/patient-portal">
+              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-[10px] px-6 text-sm font-semibold shadow-sm">
+                {t('nav.patientPortal')}
               </Button>
             </Link>
           </div>
 
           {/* Mobile: Search + Menu */}
-          <div className="flex lg:hidden items-center gap-1">
+          <div className="flex lg:hidden items-center gap-2 sm:gap-3">
             <SearchBar />
             <Button
               variant="ghost"
               size="icon"
-              className={textColor}
+              className={`${textColor} h-11 w-11 rounded-full`}
               onClick={() => setIsMobileMenuOpen(true)}
             >
               <Menu className="w-6 h-6" />

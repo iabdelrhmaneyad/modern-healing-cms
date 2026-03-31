@@ -4,11 +4,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Modern King';
+  src: local('Modern King');
+  font-display: swap;
+}
+
 /* CapitalMed Premium Healthcare Design System
    Elegant, minimal, sophisticated — luxury private hospital */
 
 @layer base {
   :root {
+    --font-brand: 'Modern King', 'Montserrat', 'Noto Sans Arabic', sans-serif;
+    --font-body: 'Modern King', 'Montserrat', 'Noto Sans Arabic', sans-serif;
+    --header-height: 7.75rem;
+    --section-space: clamp(4rem, 7vw, 6rem);
+
     /* Trust Blue - original teal-blue */
     --primary: 200 85% 35%;
     --primary-foreground: 0 0% 100%;
@@ -48,7 +59,7 @@
     --radius: 0.5rem;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(200 90% 22%) 0%, hsl(200 85% 14%) 50%, hsl(200 70% 20%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(193 90% 28%) 0%, hsl(193 85% 18%) 50%, hsl(193 80% 24%) 100%);
     --gradient-primary: linear-gradient(135deg, hsl(200 85% 40%) 0%, hsl(200 85% 30%) 100%);
     --gradient-secondary: linear-gradient(135deg, hsl(193 100% 45%) 0%, hsl(193 80% 50%) 100%);
     --gradient-light: linear-gradient(180deg, hsl(204 25% 97%) 0%, hsl(210 20% 95%) 100%);
@@ -117,6 +128,11 @@
     @apply border-border;
   }
 
+  *::selection {
+    background: hsl(var(--accent) / 0.22);
+    color: hsl(var(--foreground));
+  }
+
   html, body {
     @apply overflow-x-hidden max-w-[100vw];
   }
@@ -126,23 +142,118 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    text-wrap: pretty;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-brand);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  section {
+    scroll-margin-top: calc(var(--header-height) + 1.5rem);
   }
 
   /* RTL Support */
   [dir="rtl"] {
-    font-family: 'Noto Sans Arabic', 'Montserrat', sans-serif;
+    font-family: var(--font-body);
   }
 
   [dir="ltr"] {
-    font-family: 'Montserrat', 'Noto Sans Arabic', sans-serif;
+    font-family: var(--font-body);
   }
 }
 
 @layer components {
+  .container {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .header-utility-bar {
+    @apply flex min-h-10 flex-nowrap items-center justify-between py-2 sm:min-h-11;
+  }
+
+  .header-utility-bar__language {
+    @apply flex shrink-0 items-center self-center;
+  }
+
+  .header-utility-bar__quick-access {
+    @apply order-2 flex-1 self-center overflow-hidden md:flex-none md:basis-auto;
+  }
+
+  .header-utility-bar__phone {
+    @apply order-2 inline-flex shrink-0 items-center self-center gap-2 md:order-3 md:min-h-8;
+  }
+
+  .hero-quick-access {
+    @apply rounded-[1.5rem] border border-border/70 p-3 shadow-[0_18px_50px_rgba(4,27,41,0.08)] backdrop-blur-lg;
+    background: hsl(var(--background) / 0.88);
+  }
+
+  .hero-quick-access--compact {
+    @apply rounded-none border-0 bg-transparent p-0 shadow-none backdrop-blur-0;
+    background: none;
+  }
+
+  .hero-quick-access__list {
+    @apply flex flex-col gap-2 sm:flex-row sm:flex-wrap lg:grid lg:grid-cols-4;
+  }
+
+  .hero-quick-access__list--compact {
+    @apply flex-row flex-nowrap items-center gap-1 overflow-x-auto pb-0 justify-center md:gap-3;
+  }
+
+  .hero-quick-access__link {
+    @apply min-w-0;
+  }
+
+  .hero-quick-access__link--compact {
+    @apply min-w-0 shrink-0 flex-none;
+  }
+
+  .hero-quick-access__item {
+    @apply inline-flex w-full items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-semibold transition-all duration-200 whitespace-nowrap shadow-sm;
+  }
+
+  .hero-quick-access__item--compact {
+    @apply inline-flex min-h-8 w-auto items-center px-2 py-1 text-[10px] shadow-none sm:px-2.5 sm:py-1.5 sm:text-xs;
+  }
+
+  .site-header {
+    transition: background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
+  }
+
+  .site-header--top {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .site-header--scrolled {
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+
   /* Premium Page Hero with wave divider */
   .page-hero {
-    @apply relative pt-36 pb-24 overflow-hidden;
+    @apply relative overflow-hidden pb-20 pt-44 md:pb-24 md:pt-48;
     background: linear-gradient(135deg, hsl(200 90% 24%) 0%, hsl(200 85% 16%) 100%);
   }
 
@@ -163,7 +274,7 @@
 
   /* Navigation */
   .nav-link {
-    @apply relative px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-300;
+    @apply relative rounded-full px-4 py-2 text-sm font-medium tracking-[0.08em] transition-colors duration-300;
   }
 
   .nav-link::after {
@@ -191,11 +302,12 @@
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-foreground leading-tight;
+    @apply text-3xl font-bold text-foreground md:text-4xl lg:text-5xl;
+    font-family: var(--font-brand);
   }
 
   .section-subtitle {
-    @apply text-base text-muted-foreground max-w-2xl mx-auto mt-3 leading-relaxed;
+    @apply mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg;
   }
 
   /* Stat Number */
@@ -205,7 +317,7 @@
 
   /* Premium Card */
   .premium-card {
-    @apply bg-card rounded-xl border border-border p-6 transition-all duration-300;
+    @apply flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 md:p-8;
     box-shadow: var(--shadow-sm);
   }
 
@@ -218,6 +330,30 @@
   .glass {
     @apply backdrop-blur-xl border border-white/15;
     background: rgba(255, 255, 255, 0.06);
+  }
+
+  .hero-carousel-controls {
+    @apply pointer-events-none flex items-center justify-center gap-4 sm:gap-5;
+  }
+
+  .hero-carousel-track {
+    @apply pointer-events-auto flex items-center gap-2 rounded-full border border-white/15 bg-[rgba(8,25,36,0.35)] px-4 py-3 shadow-[0_12px_32px_rgba(0,0,0,0.18)] backdrop-blur-md sm:px-5;
+  }
+
+  .hero-carousel-arrow {
+    @apply pointer-events-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-white/30 text-white/80 transition-all duration-200 hover:border-white/60 hover:bg-white/10 hover:text-white active:scale-95 sm:h-12 sm:w-12;
+  }
+
+  .hero-carousel-indicator {
+    @apply h-1.5 rounded-full transition-all duration-300;
+  }
+
+  .hero-carousel-indicator--active {
+    @apply w-8 bg-accent;
+  }
+
+  .hero-carousel-indicator--idle {
+    @apply w-3 bg-white/40 hover:bg-white/60;
   }
 }
 
@@ -246,17 +382,127 @@
   }
 }
 
+@media (max-width: 1023px) {
+  :root {
+    --header-height: 7.25rem;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 6.75rem;
+    --section-space: 3.5rem;
+  }
+
+  .hero-quick-access {
+    @apply px-2.5 py-2.5;
+  }
+
+  .hero-quick-access__item {
+    @apply justify-start text-xs;
+  }
+
+  .hero-quick-access__list--compact {
+    @apply justify-start gap-0.5;
+  }
+
+  .hero-quick-access__link--compact {
+    @apply min-w-0 flex-none;
+  }
+
+  .hero-quick-access__item--compact {
+    @apply w-auto justify-center px-1.5 py-1 text-[9px] gap-1;
+  }
+
+  .hero-carousel-controls {
+    @apply gap-3;
+  }
+
+  .hero-carousel-track {
+    @apply px-3 py-2.5;
+  }
+
+  .page-hero::after {
+    height: 36px;
+  }
+
+  .section-title {
+    @apply text-2xl;
+  }
+
+  .premium-card {
+    @apply p-4;
+  }
+
+  .page-hero {
+    @apply pb-16 pt-36;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    @apply text-xl;
+  }
+
+  .section-subtitle {
+    @apply text-sm;
+  }
+
+  .premium-card {
+    @apply p-3;
+  }
+
+  .container {
+    @apply px-3;
+  }
+}
+
 /* Accessibility: High Contrast Mode */
 html.high-contrast {
   --background: 0 0% 0%;
   --foreground: 0 0% 100%;
   --card: 0 0% 5%;
   --card-foreground: 0 0% 100%;
+  --popover: 0 0% 5%;
+  --popover-foreground: 0 0% 100%;
   --muted: 0 0% 15%;
   --muted-foreground: 0 0% 85%;
   --border: 0 0% 40%;
+  --input: 0 0% 20%;
   --primary: 200 100% 60%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 193 100% 55%;
+  --secondary-foreground: 0 0% 0%;
   --accent: 50 100% 60%;
+  --accent-foreground: 0 0% 0%;
+  --destructive: 0 100% 60%;
+  --destructive-foreground: 0 0% 0%;
+}
+
+html.high-contrast .text-white {
+  color: hsl(0 0% 100%) !important;
+}
+
+html.high-contrast .text-white\/80,
+html.high-contrast .text-white\/70,
+html.high-contrast .text-white\/60,
+html.high-contrast .text-white\/50,
+html.high-contrast .text-white\/90 {
+  color: hsl(0 0% 90%) !important;
+}
+
+html.high-contrast .premium-card,
+html.high-contrast .bg-white {
+  background: hsl(var(--card)) !important;
+  color: hsl(var(--card-foreground)) !important;
+}
+
+html.high-contrast .page-hero {
+  background: hsl(0 0% 5%) !important;
+}
+
+html.high-contrast .site-header--scrolled {
+  background: hsl(0 0% 5%) !important;
 }
 
 html.high-contrast * {
@@ -276,8 +522,6 @@ html.reading-mode body {
   line-height: 1.8;
 }
 
-html.reading-mode header,
-html.reading-mode footer,
 html.reading-mode .page-hero::before,
 html.reading-mode .page-hero::after {
   display: none;
@@ -287,6 +531,32 @@ html.reading-mode .page-hero {
   padding-top: 2rem;
   padding-bottom: 2rem;
   background: hsl(var(--muted));
+}
+
+html.reading-mode .page-hero .text-white {
+  color: hsl(var(--foreground)) !important;
+}
+
+html.reading-mode .page-hero .text-white\/80,
+html.reading-mode .page-hero .text-white\/70,
+html.reading-mode .page-hero .text-white\/60,
+html.reading-mode .page-hero .text-white\/50,
+html.reading-mode .page-hero .text-white\/90,
+html.reading-mode .page-hero .text-lg.text-white\/60 {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+html.reading-mode .site-header {
+  position: relative;
+  background: hsl(var(--card)) !important;
+}
+
+html.reading-mode .site-header .text-white {
+  color: hsl(var(--foreground)) !important;
+}
+
+html.reading-mode .site-header .drop-shadow-\[0_1px_3px_rgba\(0\,0\,0\,0\.3\)\] {
+  filter: none !important;
 }
 
 html.reading-mode section {

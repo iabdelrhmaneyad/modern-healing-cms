@@ -7,6 +7,7 @@ import About from '@/components/About';
 import Pillars from '@/components/Pillars';
 import HotlineBar from '@/components/HotlineBar';
 import SuccessStories from '@/components/SuccessStories';
+import LatestNews from '@/components/LatestNews';
 
 const Index: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ const Index: React.FC = () => {
         <Services />
         <HotlineBar />
         <About />
+        <LatestNews />
         <SuccessStories />
       </main>
     </motion.div>

@@ -1,1 +1,11 @@
 project_id = "schibsibupltlhbylmws"
+
+[auth]
+enabled = true
+site_url = "http://localhost:5176"
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = false
+enable_confirmations = false

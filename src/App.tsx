@@ -26,6 +26,7 @@ import FAQPage from "./pages/FAQPage";
 import CampusMapPage from "./pages/CampusMapPage";
 import HealthcarePage from "./pages/HealthcarePage";
 import PatientPortalPage from "./pages/PatientPortalPage";
+import LaplazaPage from "./pages/LaplazaPage";
 import NotFound from "./pages/NotFound";
 import Chatbot from "@/components/Chatbot";
 import AccessibilityWidget from "@/components/AccessibilityWidget";
@@ -45,6 +46,7 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<AboutPage />} />
+                <Route path="/laplaza" element={<LaplazaPage />} />
                 <Route path="/services" element={<ServicesPage />} />
                 <Route path="/doctors" element={<DoctorsPage />} />
                 <Route path="/contact" element={<ContactPage />} />

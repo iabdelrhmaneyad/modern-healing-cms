@@ -42,7 +42,7 @@ const AccessibilityWidget: React.FC = () => {
       {/* Floating trigger button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-24 right-4 z-50 w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-all duration-200 hover:scale-105"
+        className="fixed bottom-20 right-3 z-50 w-11 h-11 sm:w-12 sm:h-12 sm:bottom-24 sm:right-4 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-all duration-200 hover:scale-105"
         aria-label={t('accessibility.title')}
       >
         <Eye className="w-5 h-5" />
@@ -55,7 +55,7 @@ const AccessibilityWidget: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-40 right-4 z-50 w-72 bg-card rounded-xl shadow-xl border border-border overflow-hidden"
+            className="fixed bottom-[5.5rem] right-3 sm:bottom-40 sm:right-4 z-50 w-[calc(100vw-1.5rem)] max-w-72 bg-card rounded-xl shadow-xl border border-border overflow-hidden"
           >
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-border bg-muted/50">
@@ -100,11 +100,10 @@ const AccessibilityWidget: React.FC = () => {
               {/* High Contrast */}
               <button
                 onClick={() => setHighContrast(!highContrast)}
-                className={`w-full flex items-center gap-3 p-3 rounded-lg border transition-all duration-200 text-left ${
-                  highContrast
+                className={`w-full flex items-center gap-3 p-3 rounded-lg border transition-all duration-200 text-left ${highContrast
                     ? 'bg-primary/10 border-primary text-primary'
                     : 'border-border hover:bg-muted/50 text-foreground'
-                }`}
+                  }`}
               >
                 <Contrast className="w-5 h-5 flex-shrink-0" />
                 <div>
@@ -116,11 +115,10 @@ const AccessibilityWidget: React.FC = () => {
               {/* Reading Mode */}
               <button
                 onClick={() => setReadingMode(!readingMode)}
-                className={`w-full flex items-center gap-3 p-3 rounded-lg border transition-all duration-200 text-left ${
-                  readingMode
+                className={`w-full flex items-center gap-3 p-3 rounded-lg border transition-all duration-200 text-left ${readingMode
                     ? 'bg-primary/10 border-primary text-primary'
                     : 'border-border hover:bg-muted/50 text-foreground'
-                }`}
+                  }`}
               >
                 <BookOpen className="w-5 h-5 flex-shrink-0" />
                 <div>

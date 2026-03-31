@@ -1,11 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Users, Stethoscope, CalendarCheck, Siren, Phone } from 'lucide-react';
+import { Users, Stethoscope, CalendarCheck, Siren } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { cn } from '@/lib/utils';
 
-const QuickAccessBar: React.FC = () => {
-  const { t, isRTL } = useLanguage();
+interface QuickAccessBarProps {
+  compact?: boolean;
+}
+
+const QuickAccessBar: React.FC<QuickAccessBarProps> = ({ compact = false }) => {
+  const { t } = useLanguage();
 
   const actions = [
     { icon: Users, label: t('quick.bar.patients'), href: '/patient-portal', color: 'bg-primary hover:bg-primary/90 text-primary-foreground' },
@@ -19,32 +24,28 @@ const QuickAccessBar: React.FC = () => {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.3 }}
+      className={cn('hero-quick-access', compact && 'hero-quick-access--compact')}
     >
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-2 flex-wrap">
-            {actions.map((action) => {
-              const Icon = action.icon;
-              const content = (
-                <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 whitespace-nowrap ${action.color}`}>
-                  <Icon className="w-3.5 h-3.5" />
-                  {action.label}
-                </span>
-              );
+      <div className={cn('hero-quick-access__list', compact && 'hero-quick-access__list--compact')}>
+        {actions.map((action) => {
+          const Icon = action.icon;
+          const content = (
+            <span className={cn('hero-quick-access__item', compact && 'hero-quick-access__item--compact', action.color)}>
+              <Icon className={cn('shrink-0', compact ? 'h-3.5 w-3.5 sm:h-4 sm:w-4' : 'h-4 w-4')} />
+              {action.label}
+            </span>
+          );
 
-              return action.isExternal ? (
-                <a key={action.label} href={action.href}>
-                  {content}
-                </a>
-              ) : (
-                <Link key={action.label} to={action.href}>
-                  {content}
-                </Link>
-              );
-            })}
-          </div>
-
-        </div>
+          return action.isExternal ? (
+            <a key={action.label} href={action.href} className={cn('hero-quick-access__link', compact && 'hero-quick-access__link--compact')}>
+              {content}
+            </a>
+          ) : (
+            <Link key={action.label} to={action.href} className={cn('hero-quick-access__link', compact && 'hero-quick-access__link--compact')}>
+              {content}
+            </Link>
+          );
+        })}
       </div>
     </motion.div>
   );

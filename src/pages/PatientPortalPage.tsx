@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   CalendarCheck, FileText, Pill, Activity, MessageSquare,
   CreditCard, Clock, Shield, ArrowRight, User, LogOut,
-  Stethoscope, TestTube, Heart, Thermometer
+  Stethoscope, TestTube, Heart, Thermometer, Mail, Lock, Eye, EyeOff
 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { supabase } from '@/integrations/supabase/client';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -48,57 +48,151 @@ interface MedicalRecord {
   results: any;
 }
 
+// ── Mock data ─────────────────────────────────────────────────────────────────
+const MOCK_RECORDS: MedicalRecord[] = [
+  {
+    id: 'rec-1', title: 'Annual Checkup', record_type: 'visit',
+    date: '2026-02-10', doctor_name: 'Dr. Sarah Johnson', department: 'Internal Medicine',
+    description: 'Routine annual physical examination',
+    notes: 'All vitals normal, continue current medications', results: null,
+  },
+  {
+    id: 'rec-2', title: 'Upcoming Cardiology Appointment', record_type: 'appointment',
+    date: '2026-04-15', doctor_name: 'Dr. Mohamed Hassan', department: 'Cardiology',
+    description: 'Follow-up for blood pressure management', notes: null, results: null,
+  },
+  {
+    id: 'rec-3', title: 'Complete Blood Count (CBC)', record_type: 'lab_result',
+    date: '2026-02-10', doctor_name: 'Dr. Sarah Johnson', department: 'Laboratory',
+    description: 'Complete blood count panel',
+    notes: 'WBC: 7.2 · RBC: 4.8 · Hgb: 14.2 — All within normal range',
+    results: { wbc: '7.2', rbc: '4.8', hgb: '14.2' },
+  },
+  {
+    id: 'rec-4', title: 'Lisinopril Prescription', record_type: 'prescription',
+    date: '2026-02-10', doctor_name: 'Dr. Sarah Johnson', department: 'Internal Medicine',
+    description: 'Lisinopril 10mg once daily for blood pressure control',
+    notes: 'Refill in 3 months', results: null,
+  },
+];
+
+const buildMockPatient = (name: string, email: string, phone: string): Patient => ({
+  id: 'mock-' + Math.random().toString(36).slice(2, 10),
+  patient_id: 'PAT-' + Math.random().toString(36).toUpperCase().slice(2, 10),
+  name,
+  date_of_birth: '1990-05-15',
+  gender: 'Male',
+  blood_type: 'O+',
+  phone,
+  email,
+  address: '123 Health Street, Cairo, Egypt',
+  emergency_contact_name: 'Ahmed Ali',
+  emergency_contact_phone: '+20 100 000 0000',
+  insurance_provider: 'MedCare Insurance',
+  insurance_number: 'MC-2024-00123',
+  allergies: ['Penicillin'],
+  chronic_conditions: ['Hypertension'],
+  current_medications: ['Lisinopril 10mg', 'Aspirin 81mg'],
+});
+
+// Mock user store (in-memory, resets on page reload)
+const mockUsers: Map<string, { name: string; phone: string; password: string }> = new Map([
+  ['demo@hospital.com', { name: 'Demo Patient', phone: '+20 100 000 0000', password: 'demo123' }],
+]);
+// ──────────────────────────────────────────────────────────────────────────────
+
 const PatientPortalPage: React.FC = () => {
   const { t, isRTL, language } = useLanguage();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [patientIdInput, setPatientIdInput] = useState('');
-  const [nameInput, setNameInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState('');
   const [loading, setLoading] = useState(false);
   const [patient, setPatient] = useState<Patient | null>(null);
   const [records, setRecords] = useState<MedicalRecord[]>([]);
+  const [showRegister, setShowRegister] = useState(false);
+  const [regName, setRegName] = useState('');
+  const [regEmail, setRegEmail] = useState('');
+  const [regPassword, setRegPassword] = useState('');
+  const [regPhone, setRegPhone] = useState('');
+  const [regService, setRegService] = useState('');
+  const [regErrors, setRegErrors] = useState<Record<string, string>>({});
+  const [showRegPassword, setShowRegPassword] = useState(false);
 
-  const handleLogin = async () => {
+  const txt = (en: string, ar: string, fr: string) =>
+    language === 'ar' ? ar : language === 'fr' ? fr : en;
+
+  const handleLogin = () => {
     setLoginError('');
     setLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('patients')
-        .select('*')
-        .eq('patient_id', patientIdInput.trim())
-        .ilike('name', nameInput.trim())
-        .single();
-
-      if (error || !data) {
-        setLoginError(language === 'ar' ? 'رقم المريض أو الاسم غير صحيح' : 'Invalid Patient ID or Name');
+    // Simulate async
+    setTimeout(() => {
+      const user = mockUsers.get(emailInput.trim().toLowerCase());
+      if (!user || user.password !== passwordInput) {
+        setLoginError(txt('Invalid email or password', 'البريد الإلكتروني أو كلمة المرور غير صحيحة', 'E-mail ou mot de passe invalide'));
         setLoading(false);
         return;
       }
-
-      setPatient(data as Patient);
-
-      // Fetch medical records
-      const { data: recordsData } = await supabase
-        .from('medical_records')
-        .select('*')
-        .eq('patient_id', data.id)
-        .order('date', { ascending: false });
-
-      setRecords((recordsData || []) as MedicalRecord[]);
+      setPatient(buildMockPatient(user.name, emailInput.trim(), user.phone));
+      setRecords(MOCK_RECORDS);
       setIsLoggedIn(true);
-    } catch {
-      setLoginError(language === 'ar' ? 'حدث خطأ، حاول مرة أخرى' : 'An error occurred, please try again');
-    }
-    setLoading(false);
+      setLoading(false);
+    }, 600);
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     setPatient(null);
     setRecords([]);
-    setPatientIdInput('');
-    setNameInput('');
+    setEmailInput('');
+    setPasswordInput('');
   };
+
+  const validateRegistration = () => {
+    const errors: Record<string, string> = {};
+    if (!regName.trim()) errors.name = txt('Required', 'مطلوب', 'Requis');
+    if (!regEmail.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(regEmail))
+      errors.email = txt('Invalid email', 'بريد إلكتروني غير صالح', 'E-mail invalide');
+    if (!regPassword || regPassword.length < 6)
+      errors.password = txt('Minimum 6 characters', 'الحد الأدنى 6 أحرف', 'Minimum 6 caractères');
+    if (!regPhone.trim() || !/^[\d+\-() ]{7,}$/.test(regPhone))
+      errors.phone = txt('Invalid phone number', 'رقم هاتف غير صالح', 'Téléphone invalide');
+    if (!regService) errors.service = txt('Please select', 'يرجى الاختيار', 'Veuillez sélectionner');
+    setRegErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleRegister = () => {
+    if (!validateRegistration()) return;
+    setLoading(true);
+    setTimeout(() => {
+      if (mockUsers.has(regEmail.trim().toLowerCase())) {
+        setRegErrors({ email: txt('This email is already registered. Please log in.', 'هذا البريد مسجل بالفعل. يرجى تسجيل الدخول.', 'Cet e-mail est déjà enregistré. Veuillez vous connecter.') });
+        setLoading(false);
+        return;
+      }
+      // Save to in-memory store and auto-login
+      mockUsers.set(regEmail.trim().toLowerCase(), { name: regName.trim(), phone: regPhone.trim(), password: regPassword });
+      setPatient(buildMockPatient(regName.trim(), regEmail.trim(), regPhone.trim()));
+      setRecords([]);
+      setIsLoggedIn(true);
+      setShowRegister(false);
+      setLoading(false);
+    }, 600);
+  };
+
+  const medicalServices = [
+    { value: 'cardiology', en: 'Cardiology', ar: 'أمراض القلب', fr: 'Cardiologie' },
+    { value: 'neurology', en: 'Neurology', ar: 'أمراض الأعصاب', fr: 'Neurologie' },
+    { value: 'orthopedics', en: 'Orthopedics', ar: 'جراحة العظام', fr: 'Orthopédie' },
+    { value: 'pediatrics', en: 'Pediatrics', ar: 'طب الأطفال', fr: 'Pédiatrie' },
+    { value: 'oncology', en: 'Oncology', ar: 'الأورام', fr: 'Oncologie' },
+    { value: 'general', en: 'General Medicine', ar: 'الطب العام', fr: 'Médecine générale' },
+    { value: 'surgery', en: 'Surgery', ar: 'الجراحة', fr: 'Chirurgie' },
+    { value: 'ophthalmology', en: 'Ophthalmology', ar: 'طب العيون', fr: 'Ophtalmologie' },
+    { value: 'ent', en: 'ENT', ar: 'أنف وأذن وحنجرة', fr: 'ORL' },
+  ];
 
   const appointments = records.filter(r => r.record_type === 'appointment');
   const labResults = records.filter(r => r.record_type === 'lab_result' || r.record_type === 'test');
@@ -123,53 +217,215 @@ const PatientPortalPage: React.FC = () => {
           <div className="container mx-auto px-6">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               className="premium-card p-8 max-w-md mx-auto">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <User className="w-8 h-8 text-primary" />
-              </div>
-              <h2 className="text-xl font-bold mb-2 text-center">
-                {language === 'ar' ? 'تسجيل الدخول إلى بوابتك' : 'Login to Your Portal'}
-              </h2>
-              <p className="text-muted-foreground text-sm mb-6 text-center">
-                {language === 'ar' ? 'أدخل رقم المريض واسمك للوصول إلى سجلاتك الطبية' : 'Enter your Patient ID and name to access your medical records'}
-              </p>
-              
-              <div className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium mb-1 block">
-                    {language === 'ar' ? 'رقم المريض' : 'Patient ID'}
-                  </label>
-                  <Input
-                    placeholder={language === 'ar' ? 'مثال: PAT-001' : 'e.g., PAT-001'}
-                    value={patientIdInput}
-                    onChange={(e) => setPatientIdInput(e.target.value)}
-                    className="rounded-[8px]"
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-medium mb-1 block">
-                    {language === 'ar' ? 'الاسم الكامل' : 'Full Name'}
-                  </label>
-                  <Input
-                    placeholder={language === 'ar' ? 'أدخل اسمك الكامل' : 'Enter your full name'}
-                    value={nameInput}
-                    onChange={(e) => setNameInput(e.target.value)}
-                    className="rounded-[8px]"
-                  />
-                </div>
-                {loginError && (
-                  <p className="text-destructive text-sm text-center">{loginError}</p>
-                )}
-                <Button
-                  onClick={handleLogin}
-                  disabled={loading || !patientIdInput.trim() || !nameInput.trim()}
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-[8px]"
-                  size="lg"
-                >
-                  {loading
-                    ? (language === 'ar' ? 'جاري التحقق...' : 'Verifying...')
-                    : (language === 'ar' ? 'تسجيل الدخول' : 'Log In')}
-                </Button>
-              </div>
+
+              {/* --- LOGIN VIEW --- */}
+              {!showRegister ? (
+                <>
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <User className="w-8 h-8 text-primary" />
+                  </div>
+                  <h2 className="text-xl font-bold mb-2 text-center">
+                    {txt('Login to Your Portal', 'تسجيل الدخول إلى بوابتك', 'Connexion à votre portail')}
+                  </h2>
+                  <p className="text-muted-foreground text-sm mb-6 text-center">
+                    {txt(
+                      'Enter your email and password to access your medical records',
+                      'أدخل بريدك الإلكتروني وكلمة المرور للوصول إلى سجلاتك الطبية',
+                      'Entrez votre e-mail et mot de passe pour accéder à vos dossiers médicaux'
+                    )}
+                  </p>
+
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-sm font-medium mb-1 block">
+                        {txt('Email Address', 'البريد الإلكتروني', 'Adresse e-mail')}
+                      </label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          type="email"
+                          placeholder="example@email.com"
+                          value={emailInput}
+                          onChange={(e) => setEmailInput(e.target.value)}
+                          className="rounded-[8px] pl-10"
+                          onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-1 block">
+                        {txt('Password', 'كلمة المرور', 'Mot de passe')}
+                      </label>
+                      <div className="relative">
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          type={showPassword ? 'text' : 'password'}
+                          placeholder="••••••••"
+                          value={passwordInput}
+                          onChange={(e) => setPasswordInput(e.target.value)}
+                          className="rounded-[8px] pl-10 pr-10"
+                          onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        >
+                          {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </button>
+                      </div>
+                    </div>
+
+                    {loginError && (
+                      <p className="text-destructive text-sm text-center">{loginError}</p>
+                    )}
+
+                    <Button
+                      onClick={handleLogin}
+                      disabled={loading || !emailInput.trim() || !passwordInput}
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-[8px]"
+                      size="lg"
+                    >
+                      {loading
+                        ? txt('Verifying...', 'جاري التحقق...', 'Vérification...')
+                        : txt('Log In', 'تسجيل الدخول', 'Se connecter')}
+                    </Button>
+
+                    <p className="text-center text-sm text-muted-foreground">
+                      {txt("Don't have an account?", 'ليس لديك حساب؟', 'Pas de compte ?')}{' '}
+                      <button onClick={() => { setShowRegister(true); setLoginError(''); }} className="text-primary font-semibold hover:underline">
+                        {txt('Register Now', 'سجل الآن', 'Inscrivez-vous')}
+                      </button>
+                    </p>
+
+                    {/* Demo hint */}
+                    <div className="rounded-lg bg-muted/60 border border-border px-4 py-3 text-xs text-muted-foreground text-center space-y-0.5">
+                      <p className="font-semibold text-foreground">{txt('Demo account', 'حساب تجريبي', 'Compte démo')}</p>
+                      <p>demo@hospital.com &nbsp;/&nbsp; demo123</p>
+                    </div>
+                  </div>
+                </>
+
+                /* --- REGISTRATION FORM --- */
+              ) : (
+                <>
+                  <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
+                    <User className="w-8 h-8 text-secondary" />
+                  </div>
+                  <h2 className="text-xl font-bold mb-2 text-center">
+                    {txt('Create Account', 'إنشاء حساب', 'Créer un compte')}
+                  </h2>
+                  <p className="text-muted-foreground text-sm mb-6 text-center">
+                    {txt(
+                      'Fill out the form below to register for the patient portal',
+                      'أكمل النموذج أدناه للتسجيل في بوابة المريض',
+                      'Remplissez le formulaire ci-dessous pour vous inscrire au portail patient'
+                    )}
+                  </p>
+
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-sm font-medium mb-1 block">
+                        {txt('Full Name', 'الاسم الكامل', 'Nom complet')} *
+                      </label>
+                      <Input
+                        placeholder={txt('Enter your full name', 'أدخل اسمك الكامل', 'Entrez votre nom complet')}
+                        value={regName}
+                        onChange={(e) => setRegName(e.target.value)}
+                        className={`rounded-[8px] ${regErrors.name ? 'border-destructive' : ''}`}
+                      />
+                      {regErrors.name && <p className="text-destructive text-xs mt-1">{regErrors.name}</p>}
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-1 block">
+                        {txt('Email Address', 'البريد الإلكتروني', 'Adresse e-mail')} *
+                      </label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          type="email"
+                          placeholder="example@email.com"
+                          value={regEmail}
+                          onChange={(e) => setRegEmail(e.target.value)}
+                          className={`rounded-[8px] pl-10 ${regErrors.email ? 'border-destructive' : ''}`}
+                        />
+                      </div>
+                      {regErrors.email && <p className="text-destructive text-xs mt-1">{regErrors.email}</p>}
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-1 block">
+                        {txt('Password', 'كلمة المرور', 'Mot de passe')} *
+                      </label>
+                      <div className="relative">
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          type={showRegPassword ? 'text' : 'password'}
+                          placeholder="••••••••"
+                          value={regPassword}
+                          onChange={(e) => setRegPassword(e.target.value)}
+                          className={`rounded-[8px] pl-10 pr-10 ${regErrors.password ? 'border-destructive' : ''}`}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowRegPassword(!showRegPassword)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        >
+                          {showRegPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </button>
+                      </div>
+                      {regErrors.password && <p className="text-destructive text-xs mt-1">{regErrors.password}</p>}
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-1 block">
+                        {txt('Phone Number', 'رقم الهاتف', 'Numéro de téléphone')} *
+                      </label>
+                      <Input
+                        type="tel"
+                        placeholder="+20 xx xxxx xxxx"
+                        value={regPhone}
+                        onChange={(e) => setRegPhone(e.target.value)}
+                        className={`rounded-[8px] ${regErrors.phone ? 'border-destructive' : ''}`}
+                      />
+                      {regErrors.phone && <p className="text-destructive text-xs mt-1">{regErrors.phone}</p>}
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-1 block">
+                        {txt('Medical Service', 'الخدمة الطبية', 'Service médical')} *
+                      </label>
+                      <Select value={regService} onValueChange={setRegService}>
+                        <SelectTrigger className={`rounded-[8px] ${regErrors.service ? 'border-destructive' : ''}`}>
+                          <SelectValue placeholder={txt('Select service...', 'اختر الخدمة...', 'Sélectionnez...')} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {medicalServices.map(s => (
+                            <SelectItem key={s.value} value={s.value}>
+                              {language === 'ar' ? s.ar : language === 'fr' ? s.fr : s.en}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      {regErrors.service && <p className="text-destructive text-xs mt-1">{regErrors.service}</p>}
+                    </div>
+                    <Button
+                      onClick={handleRegister}
+                      disabled={loading}
+                      className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-[8px]"
+                      size="lg"
+                    >
+                      {loading
+                        ? txt('Registering...', 'جاري التسجيل...', 'Inscription...')
+                        : txt('Register', 'تسجيل', "S'inscrire")}
+                    </Button>
+
+                    <p className="text-center text-sm text-muted-foreground">
+                      {txt('Already have an account?', 'لديك حساب بالفعل؟', 'Déjà un compte ?')}{' '}
+                      <button onClick={() => { setShowRegister(false); setLoginError(''); }} className="text-primary font-semibold hover:underline">
+                        {txt('Log In', 'سجل الدخول', 'Se connecter')}
+                      </button>
+                    </p>
+                  </div>
+                </>
+              )}
             </motion.div>
           </div>
         </section>
@@ -180,27 +436,54 @@ const PatientPortalPage: React.FC = () => {
   // Dashboard
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-background">
-      <section className="page-hero !py-10">
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex items-center justify-between pt-14">
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center text-2xl font-bold text-white">
-                {patient?.name?.charAt(0)}
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-white">{language === 'ar' ? 'مرحباً،' : 'Welcome,'} {patient?.name}</h1>
-                <p className="text-white/60 text-sm">{language === 'ar' ? 'رقم المريض:' : 'Patient ID:'} {patient?.patient_id}</p>
-              </div>
-            </div>
-            <Button onClick={handleLogout} variant="outline" className="bg-destructive hover:bg-destructive/90 text-white border-none rounded-[8px]">
-              <LogOut className="w-4 h-4 mr-2" />
-              {language === 'ar' ? 'تسجيل الخروج' : 'Logout'}
-            </Button>
-          </div>
+      <section className="page-hero">
+        <div className="container mx-auto px-6 relative z-10 text-center">
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-secondary"
+          >
+            {t('portal.label')}
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-4 text-4xl font-bold text-white md:text-5xl"
+          >
+            {t('portal.title')}
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mx-auto max-w-2xl text-lg text-white/60"
+          >
+            {t('portal.subtitle')}
+          </motion.p>
         </div>
       </section>
 
-      <section className="container mx-auto px-6 py-8">
+      <section className="container mx-auto px-6 pb-2 pt-10 md:pt-12">
+        <div className="premium-card flex flex-col gap-5 p-6 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-4">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-2xl font-bold text-primary">
+              {patient?.name?.charAt(0)}
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-foreground">{language === 'ar' ? 'مرحباً،' : 'Welcome,'} {patient?.name}</h2>
+              <p className="text-sm text-muted-foreground">{language === 'ar' ? 'رقم المريض:' : 'Patient ID:'} {patient?.patient_id}</p>
+            </div>
+          </div>
+          <Button onClick={handleLogout} variant="outline" className="rounded-[8px] border-none bg-destructive text-white hover:bg-destructive/90">
+            <LogOut className="mr-2 h-4 w-4" />
+            {language === 'ar' ? 'تسجيل الخروج' : 'Logout'}
+          </Button>
+        </div>
+      </section>
+
+      <section className="container mx-auto px-6 pb-8 pt-6">
         <Tabs defaultValue="overview" dir={isRTL ? 'rtl' : 'ltr'}>
           <TabsList className="grid grid-cols-3 md:grid-cols-6 w-full mb-8">
             <TabsTrigger value="overview">{language === 'ar' ? 'نظرة عامة' : 'Overview'}</TabsTrigger>

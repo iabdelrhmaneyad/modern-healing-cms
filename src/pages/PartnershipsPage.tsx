@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Microscope, Stethoscope, Cpu, Building2, Award, BookOpen, BarChart3 } from 'lucide-react';
+import { GraduationCap, Microscope, Stethoscope, Cpu, Landmark, Activity, Building2, Barcode, Award, BookOpen } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -29,18 +29,18 @@ const PartnershipsPage: React.FC = () => {
   ];
 
   const brandEntities = [
-    { icon: Building2, name: isAr ? 'القلعة فينتشرز' : 'ElKalaa Ventures', desc: isAr ? 'مجموعة صناعات في الصحة والتعليم والاستثمار' : 'Group of industries in health, education & investment' },
-    { icon: Stethoscope, name: 'EHCS', desc: isAr ? 'الشركة المصرية لخدمات الرعاية الصحية — المالكة لكابيتال ميد' : 'Egyptians for Health Care Services — Owner of CAPITALMED' },
-    { icon: GraduationCap, name: isAr ? 'جامعة بدر بالقاهرة' : 'BUC (Badr University in Cairo)', desc: isAr ? 'جامعة بدر بالقاهرة' : 'Badr University in Cairo' },
-    { icon: BarChart3, name: 'CIRA', desc: isAr ? 'القاهرة للاستثمار والتطوير العقاري' : 'Cairo for Investment and Real Estate' },
-    { icon: Award, name: 'GS1 Egypt', desc: isAr ? 'جي إس وان مصر' : 'GS1 Egypt' },
-    { icon: BookOpen, name: isAr ? 'الجمعية المصرية للجودة في الرعاية الصحية' : 'Egyptian Society for Quality in Health Care', desc: isAr ? 'ESQ' : 'ESQ' },
-    { icon: BookOpen, name: isAr ? 'مؤسسة المستقبل للتعليم والتدريب والتنمية' : 'Futures Foundation', desc: isAr ? 'للتعليم والتدريب والتنمية' : 'Education Training Development' },
+    { icon: Landmark, color: 'from-amber-500 to-yellow-600', name: isAr ? 'القلعة فينتشرز' : 'ElKalaa Ventures', desc: isAr ? 'مجموعة صناعات في الصحة والتعليم والاستثمار' : 'Group of industries in health, education & investment' },
+    { icon: Activity, color: 'from-blue-500 to-blue-700', name: isAr ? 'الشركة المصرية لخدمات الرعاية الصحية' : 'EHCS', desc: isAr ? 'الشركة المالكة لمشروع كابيتال ميد' : 'Egyptians for Health Care Services — Owner of CAPITALMED' },
+    { icon: GraduationCap, color: 'from-indigo-600 to-blue-900', name: isAr ? 'جامعة بدر بالقاهرة' : 'BUC – Badr University in Cairo', desc: isAr ? 'جامعة بدر — مدينة بدر، القاهرة' : 'Badr University in Cairo' },
+    { icon: Building2, color: 'from-orange-400 to-amber-600', name: 'CIRA', desc: isAr ? 'القاهرة للاستثمار والتطوير العقاري' : 'Cairo for Investment and Real Estate' },
+    { icon: Barcode, color: 'from-sky-600 to-blue-800', name: 'GS1 Egypt', desc: isAr ? 'جي إس وان مصر — المعايير العالمية' : 'GS1 Egypt — Global Standards' },
+    { icon: Award, color: 'from-teal-500 to-green-700', name: isAr ? 'الجمعية المصرية للجودة في الرعاية الصحية' : 'Egyptian Society for Quality in Health Care', desc: isAr ? 'ESQua — الجودة في الرعاية الصحية' : 'ESQua – Quality in Health Care' },
+    { icon: BookOpen, color: 'from-purple-500 to-violet-700', name: isAr ? 'مؤسسة المستقبل للتعليم والتدريب' : 'Futures Foundation', desc: isAr ? 'للتعليم والتدريب والتنمية' : 'Education Training & Development' },
   ];
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-background">
-      
+
       <main>
         <section className="page-hero">
           <div className="container mx-auto px-6 relative z-10 text-center">
@@ -86,8 +86,8 @@ const PartnershipsPage: React.FC = () => {
           <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
             {brandEntities.map((entity, i) => (
               <motion.div key={i} variants={fadeUp} whileHover={{ y: -3 }} className="premium-card p-6 flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                  <entity.icon className="w-6 h-6 text-primary" />
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${entity.color} flex items-center justify-center shrink-0`}>
+                  <entity.icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm mb-1">{entity.name}</h3>
@@ -116,7 +116,7 @@ const PartnershipsPage: React.FC = () => {
           </motion.div>
         </section>
       </main>
-      
+
     </motion.div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -36,7 +36,7 @@ const Hero: React.FC = () => {
     <section
       id="home"
       ref={containerRef}
-      className="relative h-[80vh] min-h-[500px] max-h-[900px] flex items-end sm:items-center overflow-hidden"
+      className="relative flex min-h-screen items-end overflow-hidden sm:items-center"
     >
       {/* Background - smooth crossfade with blur */}
       <div className="absolute inset-0">
@@ -58,25 +58,13 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-5 sm:px-6 pb-20 md:pb-0">
-        <div className="max-w-2xl">
-          {/* La Plaza Hospital Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 mb-4"
-          >
-            <span className="text-accent text-xs font-bold tracking-wider uppercase">{t('hero.laPlaza')}</span>
-            <span className="text-white/40">|</span>
-            <span className="text-white/70 text-xs">{t('hero.laPlaza.tagline')}</span>
-          </motion.div>
-
+      <div className="relative z-10 container pb-24 pt-48 sm:pt-48 md:pb-12 lg:pt-48">
+        <div className="max-w-2xl lg:max-w-3xl">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-secondary text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] mb-3 sm:mb-4"
+            className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-secondary sm:mb-4 sm:text-sm"
           >
             {t('hero.smartCity')}
           </motion.p>
@@ -85,7 +73,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-3 sm:mb-4 tracking-tight leading-[1.1] drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
+            className="mb-4 text-4xl font-bold leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] sm:mb-5 sm:text-5xl md:text-6xl lg:text-7xl"
           >
             {t('hero.title')}
           </motion.h1>
@@ -94,7 +82,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-lg sm:text-xl md:text-2xl text-white/90 mb-3 sm:mb-4 font-light drop-shadow-[0_1px_6px_rgba(0,0,0,0.4)]"
+            className="mb-4 text-lg font-light text-white/90 drop-shadow-[0_1px_6px_rgba(0,0,0,0.4)] sm:mb-5 sm:text-xl md:text-2xl"
           >
             {t('hero.tagline')}
           </motion.p>
@@ -103,7 +91,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-sm sm:text-base text-white/70 mb-6 sm:mb-8 max-w-lg leading-relaxed drop-shadow-[0_1px_4px_rgba(0,0,0,0.3)]"
+            className="mb-8 max-w-xl text-sm leading-relaxed text-white/70 drop-shadow-[0_1px_4px_rgba(0,0,0,0.3)] sm:mb-10 sm:text-base"
           >
             {t('hero.description')}
           </motion.p>
@@ -112,7 +100,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="flex flex-col sm:flex-row flex-wrap gap-4 max-w-lg"
+            className="flex max-w-2xl flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center"
           >
             <Link to="/location" className="w-full sm:w-auto">
               <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-[8px] px-8 h-12 text-sm font-semibold w-full sm:w-auto">
@@ -132,7 +120,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap gap-5 sm:gap-8 mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10"
+            className="mt-10 flex flex-wrap gap-x-6 gap-y-5 border-t border-white/10 pt-6 sm:mt-12 sm:gap-x-8 sm:pt-8"
           >
             {[
               { value: '577K m²', label: 'Campus Area' },
@@ -155,21 +143,21 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Slide Navigation */}
-      <div className="absolute bottom-4 sm:bottom-8 left-0 right-0 flex items-center justify-center gap-2 sm:gap-3 z-20 px-4 sm:px-6 pointer-events-none pb-2 sm:pb-8">
-        <button onClick={prevSlide} className="pointer-events-auto w-9 h-9 sm:w-12 sm:h-12 rounded-full border-2 border-white/30 flex items-center justify-center text-white/80 hover:text-white hover:border-white/60 hover:bg-white/10 transition-all cursor-pointer active:scale-95 shrink-0">
+      <div className="hero-carousel-controls absolute inset-x-0 bottom-5 z-20 px-4 pb-2 sm:bottom-8 sm:px-6 sm:pb-6">
+        <button onClick={prevSlide} className="hero-carousel-arrow">
           {isRTL ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
         </button>
-        <div className="pointer-events-auto flex gap-2">
+        <div className="hero-carousel-track">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer ${index === currentSlide ? 'w-8 bg-accent' : 'w-3 bg-white/40 hover:bg-white/60'
+              className={`hero-carousel-indicator ${index === currentSlide ? 'hero-carousel-indicator--active' : 'hero-carousel-indicator--idle'
                 }`}
             />
           ))}
         </div>
-        <button onClick={nextSlide} className="pointer-events-auto w-9 h-9 sm:w-12 sm:h-12 rounded-full border-2 border-white/30 flex items-center justify-center text-white/80 hover:text-white hover:border-white/60 hover:bg-white/10 transition-all cursor-pointer active:scale-95 shrink-0">
+        <button onClick={nextSlide} className="hero-carousel-arrow">
           {isRTL ? <ChevronLeft className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
         </button>
       </div>

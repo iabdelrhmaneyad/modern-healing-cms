@@ -79,7 +79,7 @@ const NewsPage: React.FC = () => {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-background">
-      
+
       <main>
         <section className="page-hero">
           <div className="container mx-auto px-6 relative z-10 text-center">
@@ -98,7 +98,7 @@ const NewsPage: React.FC = () => {
                 onClick={() => setActiveCategory(cat.key)} className="rounded-[8px] text-xs">{cat.label}</Button>
             ))}
           </div>
-          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
+          <motion.div key={activeCategory} variants={stagger} initial="hidden" animate="visible" className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
             {filtered.map((article) => (
               <motion.article key={article.id} variants={fadeUp} whileHover={expandedId !== article.id ? { y: -3 } : {}}
                 layout className="premium-card overflow-hidden p-0">
@@ -168,7 +168,7 @@ const NewsPage: React.FC = () => {
           </motion.div>
         </section>
       </main>
-      
+
     </motion.div>
   );
 };

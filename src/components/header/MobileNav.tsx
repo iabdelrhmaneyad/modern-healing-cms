@@ -25,14 +25,14 @@ const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
   const mainItems = [
     { icon: Home, label: t('nav.home'), href: '/' },
     { icon: Info, label: t('nav.about'), href: '/about' },
+    { icon: Building2, label: t('nav.laplaza'), href: '/laplaza' },
     { icon: Stethoscope, label: t('nav.services'), href: '/services' },
     { icon: UserSearch, label: t('nav.doctors'), href: '/doctors' },
     { icon: Phone, label: t('nav.contact'), href: '/contact' },
   ];
 
   const moreItems = [
-    { icon: User, label: t('nav.patientPortal'), href: '/patient-portal' },
-    { icon: HeartPulse, label: language === 'ar' ? 'نظام الرعاية الصحية' : 'Healthcare Overview', href: '/healthcare' },
+    { icon: HeartPulse, label: language === 'ar' ? 'نظام الرعاية الصحية' : language === 'fr' ? 'Aperçu Santé' : 'Healthcare Overview', href: '/healthcare' },
     { icon: Building2, label: t('nav.facilities'), href: '/facilities' },
     { icon: Plane, label: t('nav.medicalTourism'), href: '/medical-tourism' },
     { icon: FlaskConical, label: t('nav.research'), href: '/research' },
@@ -53,8 +53,8 @@ const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
         to={item.href}
         onClick={onClose}
         className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${isActive
-            ? 'bg-primary text-primary-foreground font-semibold'
-            : 'text-foreground hover:bg-muted'
+          ? 'bg-primary text-primary-foreground font-semibold'
+          : 'text-foreground hover:bg-muted'
           }`}
       >
         <item.icon className="w-5 h-5 flex-shrink-0" />
@@ -71,6 +71,8 @@ const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
             <img src={capitalmedLogo} alt="CapitalMed" className="h-10 w-auto" />
           </SheetTitle>
         </SheetHeader>
+
+        <Separator className="mb-1" />
 
         <div className="px-3 pb-6 space-y-1">
           {mainItems.map((item) => (
@@ -98,6 +100,13 @@ const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
               onClick={() => setLanguage('en')}
             >
               EN
+            </Button>
+            <Button
+              variant={language === 'fr' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setLanguage('fr')}
+            >
+              FR
             </Button>
             <Button
               variant={language === 'ar' ? 'default' : 'outline'}

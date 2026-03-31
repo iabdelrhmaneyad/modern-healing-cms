@@ -213,10 +213,11 @@ const HealthcarePage: React.FC = () => {
               <p className="text-xs text-muted-foreground mb-4">{isAr ? '80% لا يرغبون بالسفر للعلاج' : '80% no longer interested in overseas treatment'}</p>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
-                  <Pie data={overseasData} cx="50%" cy="50%" outerRadius={100} innerRadius={50} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>
+                  <Pie data={overseasData} cx="50%" cy="50%" outerRadius={90} innerRadius={45} dataKey="value" labelLine={false}>
                     {overseasData.map((_, i) => <Cell key={i} fill={COLORS[i]} />)}
                   </Pie>
                   <Tooltip />
+                  <Legend wrapperStyle={{ direction: isAr ? 'rtl' : 'ltr' }} />
                 </PieChart>
               </ResponsiveContainer>
             </motion.div>
@@ -227,10 +228,11 @@ const HealthcarePage: React.FC = () => {
               <p className="text-xs text-muted-foreground mb-4">{isAr ? 'ردود فعل إيجابية من الأغلبية' : 'Well received among majority of respondents'}</p>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
-                  <Pie data={receptionData} cx="50%" cy="50%" outerRadius={100} innerRadius={50} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>
+                  <Pie data={receptionData} cx="50%" cy="50%" outerRadius={90} innerRadius={45} dataKey="value" labelLine={false}>
                     {receptionData.map((_, i) => <Cell key={i} fill={COLORS[i + 3]} />)}
                   </Pie>
                   <Tooltip />
+                  <Legend wrapperStyle={{ direction: isAr ? 'rtl' : 'ltr' }} />
                 </PieChart>
               </ResponsiveContainer>
             </motion.div>
@@ -275,11 +277,11 @@ const HealthcarePage: React.FC = () => {
             <ResponsiveContainer width="100%" height={350}>
               <RadarChart data={qualityRadar}>
                 <PolarGrid />
-                <PolarAngleAxis dataKey="metric" tick={{ fontSize: 11 }} />
+                <PolarAngleAxis dataKey="metric" tick={{ fontSize: 10 }} />
                 <PolarRadiusAxis domain={[0, 100]} tick={{ fontSize: 10 }} />
                 <Radar name={isAr ? 'المعيار الحالي' : 'Current Standard'} dataKey="current" stroke="hsl(350, 65%, 50%)" fill="hsl(350, 65%, 50%)" fillOpacity={0.2} />
                 <Radar name="CAPITALMED" dataKey="capitalmed" stroke="hsl(200, 90%, 30%)" fill="hsl(200, 90%, 30%)" fillOpacity={0.3} />
-                <Legend />
+                <Legend wrapperStyle={{ direction: isAr ? 'rtl' : 'ltr' }} />
                 <Tooltip />
               </RadarChart>
             </ResponsiveContainer>
