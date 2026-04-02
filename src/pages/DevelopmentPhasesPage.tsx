@@ -68,10 +68,10 @@ const DevelopmentPhasesPage: React.FC = () => {
           <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex flex-wrap justify-center gap-4">
             {milestones.map((m, i) => (
               <motion.div key={i} variants={fadeUp} whileHover={{ y: -3 }} className="premium-card p-5 text-center min-w-[140px]">
-                <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center mx-auto mb-2">
-                  <Calendar className="w-5 h-5 text-white" />
+                <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center mx-auto mb-2">
+                  <Calendar className="w-5 h-5 text-accent" />
                 </div>
-                <p className="text-xl font-bold" style={{ color: '#0088AD' }}>{m.year}</p>
+                <p className="text-xl font-bold text-primary">{m.year}</p>
                 <p className="text-xs text-muted-foreground">{m.event}</p>
               </motion.div>
             ))}

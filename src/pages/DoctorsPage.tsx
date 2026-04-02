@@ -289,9 +289,8 @@ const DoctorsPage: React.FC = () => {
                     </div>
                     <div className="flex gap-2">
                       <Link to="/contact" className="flex-1">
-                        <Button size="sm" className="w-full rounded-[8px] text-xs bg-accent hover:bg-accent/90">
-                          <Calendar className="w-3.5 h-3.5 mr-1" />
-                          {txt('Book Appointment', 'احجز موعداً', 'Prendre rendez-vous')}
+                        <Button size="sm" variant="outline" className="w-full rounded-[8px] text-xs">
+                          {txt('Contact Us', 'تواصل معنا', 'Contactez-nous')}
                         </Button>
                       </Link>
                       <a href="tel:16999">
