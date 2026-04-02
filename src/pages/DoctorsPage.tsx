@@ -223,7 +223,7 @@ const DoctorsPage: React.FC = () => {
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                 className="premium-card text-center p-6">
                 <stat.icon className="w-8 h-8 text-accent mx-auto mb-3" />
-                <div className="text-3xl md:text-4xl font-bold text-accent mb-2">{stat.value}</div>
+                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.value}</div>
                 <div className="text-muted-foreground text-sm">{txt(stat.labelEn, stat.labelAr, stat.labelFr)}</div>
               </motion.div>
             ))}
